@@ -16,6 +16,10 @@
 #import <LeanChatLib/CDEmotionUtils.h>
 #import "CDAppDelegate.h"
 
+#pragma mark - 红包相关头文件
+#import "RedpacketDemoViewController.h"
+#pragma mark -
+
 @interface CDIMService ()
 
 @end
@@ -64,7 +68,9 @@
     CDAppDelegate *delegate = ((CDAppDelegate *)[[UIApplication sharedApplication] delegate]);
     UIWindow *window = delegate.window;
     UITabBarController *tabbarController = (UITabBarController *)window.rootViewController;
-    CDChatVC *chatVC = [[CDChatVC alloc] initWithConversation:conversation];
+#pragma mark - 创建支持红包功能的聊天界面
+    CDChatVC *chatVC = [[RedpacketDemoViewController alloc] initWithConversation:conversation];
+#pragma mark -
     chatVC.hidesBottomBarWhenPushed = YES;
     tabbarController.selectedViewController = tabbarController.viewControllers[0];
     [navigation popToRootViewControllerAnimated:NO];
