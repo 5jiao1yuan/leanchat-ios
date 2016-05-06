@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1FAD25EBE59E07248BD0F7D5 /* libPods-LeanChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF79D434DB9DF2EFE3DD51B2 /* libPods-LeanChat.a */; };
+		431932631CDC9A71000E1DDB /* RedpacketMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 431932621CDC9A71000E1DDB /* RedpacketMessage.m */; };
 		43DC104F1CDB41E200B58E50 /* libRedpacketLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DC10221CDB41E200B58E50 /* libRedpacketLib.a */; };
 		43DC10501CDB41E200B58E50 /* GroupRedpacketDetailHeaderView~iphone.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43DC10271CDB41E200B58E50 /* GroupRedpacketDetailHeaderView~iphone.nib */; };
 		43DC10511CDB41E200B58E50 /* hudError@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43DC10281CDB41E200B58E50 /* hudError@2x.png */; };
@@ -123,6 +124,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		431932611CDC9A71000E1DDB /* RedpacketMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketMessage.h; sourceTree = "<group>"; };
+		431932621CDC9A71000E1DDB /* RedpacketMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedpacketMessage.m; sourceTree = "<group>"; };
 		43DC10221CDB41E200B58E50 /* libRedpacketLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libRedpacketLib.a; sourceTree = "<group>"; };
 		43DC10231CDB41E200B58E50 /* RedpacketMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketMessageModel.h; sourceTree = "<group>"; };
 		43DC10241CDB41E200B58E50 /* RedpacketOpenConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketOpenConst.h; sourceTree = "<group>"; };
@@ -392,6 +395,8 @@
 				43DC104C1CDB41E200B58E50 /* RedpacketCellResource.bundle */,
 				43DC104D1CDB41E200B58E50 /* RedpacketDemoViewController.h */,
 				43DC104E1CDB41E200B58E50 /* RedpacketDemoViewController.m */,
+				431932611CDC9A71000E1DDB /* RedpacketMessage.h */,
+				431932621CDC9A71000E1DDB /* RedpacketMessage.m */,
 			);
 			path = RedpacketSDK;
 			sourceTree = "<group>";
@@ -716,7 +721,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = "lzwjava@LeanCloud QQ: 651142978";
+				ORGANIZATIONNAME = "云帐户";
 				TargetAttributes = {
 					7073FC161B147048006F2692 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -890,6 +895,7 @@
 				7073FCCA1B14718C006F2692 /* CDBadgeLabel.m in Sources */,
 				70B1C51B1B413E1500DCEC8D /* MCMutipleSectionTC.m in Sources */,
 				7073FCC31B14718C006F2692 /* CDAbuseReport.m in Sources */,
+				431932631CDC9A71000E1DDB /* RedpacketMessage.m in Sources */,
 				7073FCCB1B14718C006F2692 /* CDButton.m in Sources */,
 				7073FCDB1B1471A4006F2692 /* CDAppDelegate.m in Sources */,
 				7073FCC11B14718C006F2692 /* CDUserInfoVC.m in Sources */,
