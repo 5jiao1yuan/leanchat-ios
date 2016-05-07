@@ -23,6 +23,10 @@
 #import <OpenShare/OpenShareHeader.h>
 #import "MBProgressHUD.h"
 
+#pragma mark - 红包相关头文件
+#import "RedpacketConfig.h"
+#pragma mark -
+
 @interface CDAppDelegate()
 
 @property (nonatomic, strong) CDLoginVC *loginVC;
@@ -154,6 +158,11 @@
 }
 
 - (void)toMain{
+#pragma mark - 红包相关功能
+    // 因为 LeanChat 里登录的时候也会执行这里的 toMain，所以在这里执行配置红包 Token 的功能
+    // 进入 toMain 时 LeanChat 已经确保存在 userId
+    [RedpacketConfig config];
+#pragma mark -
     [iRate sharedInstance].applicationBundleID = @"com.avoscloud.leanchat";
     [iRate sharedInstance].onlyPromptIfLatestVersion = NO;
     [iRate sharedInstance].previewMode = NO;

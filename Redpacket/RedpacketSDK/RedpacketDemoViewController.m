@@ -99,6 +99,50 @@
     [self performSelector:@selector(sendMessage:) withObject:message];
 }
 
+#pragma mark - 红包功能显示界面处理
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    id<XHMessageModel> message = [self.dataSource messageForRowAtIndexPath:indexPath];
+    BOOL displayTimestamp = YES;
+    BOOL displayPeerName = NO;
+    if ([self.delegate respondsToSelector:@selector(shouldDisplayTimestampForRowAtIndexPath:)]) {
+        displayTimestamp = [self.delegate shouldDisplayTimestampForRowAtIndexPath:indexPath];
+    }
+    if ([self.delegate respondsToSelector:@selector(shouldDisplayPeerName)]) {
+        displayPeerName = [self.delegate shouldDisplayPeerName];
+    }
+    
+    XHMessageTableViewCell *messageTableViewCell;
+    switch (message.bubbleMessageType) {
+        case XHBubbleMessageTypeReceiving:
+            messageTableViewCell = [tableView dequeueReusableCellWithIdentifier:receiverCellIdentifier];
+            if (!messageTableViewCell) {
+                messageTableViewCell = [[XHMessageTableViewCell alloc] initWithMessage:message
+                                                                       reuseIdentifier:receiverCellIdentifier];
+                messageTableViewCell.delegate = self;
+            }
+            break;
+        case XHBubbleMessageTypeSending:
+            messageTableViewCell = [tableView dequeueReusableCellWithIdentifier:senderCellIdentifier];
+            displayPeerName = NO;
+            if (!messageTableViewCell) {
+                messageTableViewCell = [[XHMessageTableViewCell alloc] initWithMessage:message
+                                                                       reuseIdentifier:senderCellIdentifier];
+                messageTableViewCell.delegate = self;
+            }
+            break;
+    }
+    
+    messageTableViewCell.indexPath = indexPath;
+    [messageTableViewCell configureCellWithMessage:message displaysTimestamp:displayTimestamp displaysPeerName:displayPeerName];
+    [messageTableViewCell setBackgroundColor:tableView.backgroundColor];
+    
+    if ([self.delegate respondsToSelector:@selector(configureCell:atIndexPath:)]) {
+        [self.delegate configureCell:messageTableViewCell atIndexPath:indexPath];
+    }
+    return messageTableViewCell;
+}
+
+#pragma mark - 红包功能入口事件处理
 - (void)didSelecteShareMenuItem:(XHShareMenuItem *)shareMenuItem atIndex:(NSInteger)index
 {
     if (0 == index) { // 红包功能

@@ -22,6 +22,10 @@
 #import "CDProfileNameVC.h"
 #import "LZPushManager.h"
 
+#pragma mark - 红包相关头文件
+#import "RedpacketConfig.h"
+#pragma mark -
+
 @interface CDProfileVC ()<UIActionSheetDelegate, CDProfileNameVCDelegate>
 
 @property (nonatomic, strong) MCPhotographyHelper *photographyHelper;
@@ -130,6 +134,9 @@
 }
 
 - (void)logout {
+#pragma mark - 红包相关功能
+    [RedpacketConfig logout];
+#pragma mark -
     [[CDChatManager manager] closeWithCallback: ^(BOOL succeeded, NSError *error) {
         DLog(@"%@", error);
         [self deleteAuthDataCache];

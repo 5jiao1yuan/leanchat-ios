@@ -35,7 +35,7 @@
 @end
 
 #pragma mark - AVIMTypedMessage 的红包功能扩展
-// LeanChat 实现不支持“不识别”消息的显示，所以这里只使用 AVIMTextMessage 的 attributes 来传递红包信息
+// 这里只使用 AVIMTextMessage 的 attributes 来传递红包信息
 @interface AVIMTextMessage (Redpacket)
 
 @end

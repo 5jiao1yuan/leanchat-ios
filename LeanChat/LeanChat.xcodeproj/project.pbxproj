@@ -9,7 +9,10 @@
 /* Begin PBXBuildFile section */
 		1FAD25EBE59E07248BD0F7D5 /* libPods-LeanChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF79D434DB9DF2EFE3DD51B2 /* libPods-LeanChat.a */; };
 		431932631CDC9A71000E1DDB /* RedpacketMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 431932621CDC9A71000E1DDB /* RedpacketMessage.m */; };
-		43DC104F1CDB41E200B58E50 /* libRedpacketLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DC10221CDB41E200B58E50 /* libRedpacketLib.a */; };
+		4319326A1CDD9C12000E1DDB /* RedpacketMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 431932691CDD9C12000E1DDB /* RedpacketMessageCell.m */; };
+		4319326D1CDD9C59000E1DDB /* RedpacketTakenMessageTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4319326C1CDD9C59000E1DDB /* RedpacketTakenMessageTipCell.m */; };
+		4319326E1CDD9DB5000E1DDB /* libRedpacketLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DC10221CDB41E200B58E50 /* libRedpacketLib.a */; };
+		431932721CDD9F2D000E1DDB /* RedpacketConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 431932711CDD9F2D000E1DDB /* RedpacketConfig.m */; };
 		43DC10501CDB41E200B58E50 /* GroupRedpacketDetailHeaderView~iphone.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43DC10271CDB41E200B58E50 /* GroupRedpacketDetailHeaderView~iphone.nib */; };
 		43DC10511CDB41E200B58E50 /* hudError@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43DC10281CDB41E200B58E50 /* hudError@2x.png */; };
 		43DC10521CDB41E200B58E50 /* hudRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43DC10291CDB41E200B58E50 /* hudRefresh@2x.png */; };
@@ -126,6 +129,12 @@
 /* Begin PBXFileReference section */
 		431932611CDC9A71000E1DDB /* RedpacketMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketMessage.h; sourceTree = "<group>"; };
 		431932621CDC9A71000E1DDB /* RedpacketMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedpacketMessage.m; sourceTree = "<group>"; };
+		431932681CDD9C12000E1DDB /* RedpacketMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketMessageCell.h; sourceTree = "<group>"; };
+		431932691CDD9C12000E1DDB /* RedpacketMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedpacketMessageCell.m; sourceTree = "<group>"; };
+		4319326B1CDD9C59000E1DDB /* RedpacketTakenMessageTipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketTakenMessageTipCell.h; sourceTree = "<group>"; };
+		4319326C1CDD9C59000E1DDB /* RedpacketTakenMessageTipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedpacketTakenMessageTipCell.m; sourceTree = "<group>"; };
+		431932701CDD9F2D000E1DDB /* RedpacketConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketConfig.h; sourceTree = "<group>"; };
+		431932711CDD9F2D000E1DDB /* RedpacketConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedpacketConfig.m; sourceTree = "<group>"; };
 		43DC10221CDB41E200B58E50 /* libRedpacketLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libRedpacketLib.a; sourceTree = "<group>"; };
 		43DC10231CDB41E200B58E50 /* RedpacketMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketMessageModel.h; sourceTree = "<group>"; };
 		43DC10241CDB41E200B58E50 /* RedpacketOpenConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketOpenConst.h; sourceTree = "<group>"; };
@@ -303,13 +312,13 @@
 				9A2AFA7D1C2AB22500F451BE /* StoreKit.framework in Frameworks */,
 				9A2AFA7B1C2AB21E00F451BE /* Security.framework in Frameworks */,
 				9A2AFA791C2AB21100F451BE /* QuartzCore.framework in Frameworks */,
-				43DC104F1CDB41E200B58E50 /* libRedpacketLib.a in Frameworks */,
 				9A2AFA6F1C2AADBB00F451BE /* MobileCoreServices.framework in Frameworks */,
 				9A2AFA771C2AB1EA00F451BE /* MediaPlayer.framework in Frameworks */,
 				9A2AFA751C2AB1CE00F451BE /* AVFoundation.framework in Frameworks */,
 				9A2AFA731C2AADCB00F451BE /* CoreLocation.framework in Frameworks */,
 				9A2AFA711C2AADC200F451BE /* CoreTelephony.framework in Frameworks */,
 				1FAD25EBE59E07248BD0F7D5 /* libPods-LeanChat.a in Frameworks */,
+				4319326E1CDD9DB5000E1DDB /* libRedpacketLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +406,12 @@
 				43DC104E1CDB41E200B58E50 /* RedpacketDemoViewController.m */,
 				431932611CDC9A71000E1DDB /* RedpacketMessage.h */,
 				431932621CDC9A71000E1DDB /* RedpacketMessage.m */,
+				431932681CDD9C12000E1DDB /* RedpacketMessageCell.h */,
+				431932691CDD9C12000E1DDB /* RedpacketMessageCell.m */,
+				4319326B1CDD9C59000E1DDB /* RedpacketTakenMessageTipCell.h */,
+				4319326C1CDD9C59000E1DDB /* RedpacketTakenMessageTipCell.m */,
+				431932701CDD9F2D000E1DDB /* RedpacketConfig.h */,
+				431932711CDD9F2D000E1DDB /* RedpacketConfig.m */,
 			);
 			path = RedpacketSDK;
 			sourceTree = "<group>";
@@ -887,6 +902,7 @@
 				7087E77E1B78BF34003641E2 /* CDEntryBaseVC.m in Sources */,
 				7073FC1D1B147048006F2692 /* main.m in Sources */,
 				7073FCAD1B14718C006F2692 /* CDWebViewVC.m in Sources */,
+				4319326A1CDD9C12000E1DDB /* RedpacketMessageCell.m in Sources */,
 				7073FCD21B14718C006F2692 /* CDLabelButtonTableCell.m in Sources */,
 				70DC7DB41B2F531F0047B7AB /* CDUserManager.m in Sources */,
 				7073FCB81B14718C006F2692 /* CDLoginVC.m in Sources */,
@@ -895,6 +911,7 @@
 				7073FCCA1B14718C006F2692 /* CDBadgeLabel.m in Sources */,
 				70B1C51B1B413E1500DCEC8D /* MCMutipleSectionTC.m in Sources */,
 				7073FCC31B14718C006F2692 /* CDAbuseReport.m in Sources */,
+				431932721CDD9F2D000E1DDB /* RedpacketConfig.m in Sources */,
 				431932631CDC9A71000E1DDB /* RedpacketMessage.m in Sources */,
 				7073FCCB1B14718C006F2692 /* CDButton.m in Sources */,
 				7073FCDB1B1471A4006F2692 /* CDAppDelegate.m in Sources */,
@@ -927,6 +944,7 @@
 				9AD85BB91C21666B006A35C1 /* CYLTabBarControllerConfig.m in Sources */,
 				70B1C51E1B41430500DCEC8D /* MCPhotographyHelper.m in Sources */,
 				70EB81591B4399AB0010659C /* CDProfileNameVC.m in Sources */,
+				4319326D1CDD9C59000E1DDB /* RedpacketTakenMessageTipCell.m in Sources */,
 				43DC10731CDB41E200B58E50 /* RedpacketDemoViewController.m in Sources */,
 				7073FCB91B14718C006F2692 /* CDRegisterVC.m in Sources */,
 				7073FCAF1B14718C006F2692 /* CDConvsVC.m in Sources */,
@@ -1041,6 +1059,7 @@
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
+					"-all_load",
 					"-ObjC",
 					"-undefined",
 					dynamic_lookup,
@@ -1129,6 +1148,7 @@
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
+					"-all_load",
 					"-ObjC",
 					"-undefined",
 					dynamic_lookup,
