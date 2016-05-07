@@ -24,11 +24,13 @@
 
 #pragma mark - 红包相关头文件
 #import "RedpacketConfig.h"
+#import "RedpacketViewControl.h"
 #pragma mark -
 
 @interface CDProfileVC ()<UIActionSheetDelegate, CDProfileNameVCDelegate>
 
 @property (nonatomic, strong) MCPhotographyHelper *photographyHelper;
+@property (nonatomic, strong, readwrite) RedpacketViewControl *redpacketControl;
 
 @end
 
@@ -66,7 +68,11 @@
             [self hideProgress];
             self.dataSource = [NSMutableArray array];
             [self.dataSource addObject:@[@{ kMutipleSectionImageKey:image, kMutipleSectionTitleKey:[AVUser currentUser].username, kMutipleSectionSelectorKey:NSStringFromSelector(@selector(showEditActionSheet:)) }]];
-            [self.dataSource addObject:@[@{ kMutipleSectionTitleKey:@"消息通知", kMutipleSectionSelectorKey:NSStringFromSelector(@selector(goPushSetting)) }, @{ kMutipleSectionTitleKey:@"意见反馈", kMutipleSectionBadgeKey:@(number), kMutipleSectionSelectorKey:NSStringFromSelector(@selector(goFeedback)) }, @{ kMutipleSectionTitleKey:@"用户协议", kMutipleSectionSelectorKey:NSStringFromSelector(@selector(goTerms)) }, @{kMutipleSectionTitleKey:@"分享应用", kMutipleSectionSelectorKey:SELECTOR_TO_STRING(shareApp:)}]];
+            [self.dataSource addObject:@[@{ kMutipleSectionTitleKey:@"红包零钱", kMutipleSectionSelectorKey:NSStringFromSelector(@selector(showMeTheMoney)) },]];
+            [self.dataSource addObject:@[@{ kMutipleSectionTitleKey:@"消息通知", kMutipleSectionSelectorKey:NSStringFromSelector(@selector(goPushSetting)) },
+  @{ kMutipleSectionTitleKey:@"意见反馈", kMutipleSectionBadgeKey:@(number), kMutipleSectionSelectorKey:NSStringFromSelector(@selector(goFeedback)) },
+  @{ kMutipleSectionTitleKey:@"用户协议", kMutipleSectionSelectorKey:NSStringFromSelector(@selector(goTerms)) },
+  @{kMutipleSectionTitleKey:@"分享应用", kMutipleSectionSelectorKey:SELECTOR_TO_STRING(shareApp:)}]];
             [self.dataSource addObject:@[@{ kMutipleSectionTitleKey:@"退出登录", kMutipleSectionLogoutKey:@YES, kMutipleSectionSelectorKey:NSStringFromSelector(@selector(logout)) }]];
             [self.tableView reloadData];
         }];
@@ -165,6 +171,15 @@
     [self presentViewController:navigationController animated:YES completion: ^{
     }];
     [self performSelector:@selector(loadDataSource) withObject:nil afterDelay:1];
+}
+
+- (void)showMeTheMoney
+{
+    if (!self.redpacketControl) {
+        self.redpacketControl = [[RedpacketViewControl alloc] init];
+        self.redpacketControl.conversationController = self;
+    }
+    [self.redpacketControl presentChangeMoneyViewController];
 }
 
 #pragma mark - share App
