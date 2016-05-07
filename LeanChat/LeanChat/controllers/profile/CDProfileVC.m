@@ -173,6 +173,7 @@
     [self performSelector:@selector(loadDataSource) withObject:nil afterDelay:1];
 }
 
+#pragma mark - 红包功能
 - (void)showMeTheMoney
 {
     if (!self.redpacketControl) {
