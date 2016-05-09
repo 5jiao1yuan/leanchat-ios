@@ -22,8 +22,6 @@
 #define REDPACKET_BUNDLE(name) @"RedpacketCellResource.bundle/" name
 #pragma mark -
 
-#import <objc/objc-runtime.h>
-
 static NSString *const RedpacketMessageCellReceiverIdentifier = @"RedpacketMessageCellReceiverIdentifier";
 static NSString *const RedpacketMessageCellSenderIdentifier = @"RedpacketMessageCellSenderIdentifier";
 static NSString *const RedpacketTakenMessageTipCellReceiverIdentifier = @"RedpacketTakenMessageTipCellReceiverIdentifier";
@@ -101,21 +99,6 @@ static NSString *const RedpacketTakenMessageTipCellSenderIdentifier = @"Redpacke
     [[YZHRedpacketBridge sharedBridge] reRequestRedpacketUserToken];
 }
 
-// 为了尽量沿用原来的代码而不修改原始的文件和代码, 需要执行 [super method] 的基类方法
-// 但由于原来的基类未开放大部分的接口，所以不能通过 [- performSelector:withObject:]
-// 需要使用 ObjC 运行时库来执行
-// 参考:
-// http://stackoverflow.com/questions/20127714/the-infinite-loop-when-using-super-peformselector-method
-// http://stackoverflow.com/questions/16678463/accessing-a-method-in-a-super-class-when-its-not-exposed
-- (id)callSuperMethod:(SEL)method withObject:(id)object
-{
-    struct objc_super mySuper;
-    mySuper.receiver = self;
-    mySuper.super_class = self.superclass;
-    
-    // 另外由于 Xcode 的新要求，必须先把原先的方法强制转成特定的函数指针形式才可以执行
-    return ((id (*)(struct objc_super *, SEL, ...))objc_msgSendSuper)(&mySuper, method, object);
-}
 
 #pragma mark - 融云消息与红包插件消息转换与处理
 // 发送融云红包消息
@@ -124,8 +107,7 @@ static NSString *const RedpacketTakenMessageTipCellSenderIdentifier = @"Redpacke
     RedpacketMessage *message = [RedpacketMessage messageWithRedpacket:redpacket];
     assert(message);
     
-    [self performSelector:@selector(sendMessage:) withObject:message];
-    [self finishSendMessageWithBubbleMessageType:XHBubbleMessageMediaTypeText];
+    [self sendRedpacketMessage:message];
 }
 
 // 红包被抢消息处理
@@ -134,59 +116,6 @@ static NSString *const RedpacketTakenMessageTipCellSenderIdentifier = @"Redpacke
     RedpacketMessage *message = [RedpacketMessage messageWithRedpacket:redpacket];
     assert(message);
     [self performSelector:@selector(sendMessage:) withObject:message];
-}
-
-- (AVIMTypedMessage *)getAVIMTypedMessageWithMessage:(XHMessage *)message
-{
-    if ([message isKindOfClass:[RedpacketMessage class]]) {
-        RedpacketMessage *r = (RedpacketMessage *)message;
-        AVIMTypedMessage *avimMessage = nil;
-        if(RedpacketMessageTypeRedpacket == r.redpacket.messageType) {
-            avimMessage = [AVIMTextMessage messageWithRedpacket:r.redpacket];
-        }
-        else if(RedpacketMessageTypeTedpacketTakenMessage == r.redpacket.messageType) {
-            avimMessage = [RedpacketTakenAVIMMessage messageWithRedpacket:r.redpacket];
-        }
-        assert(avimMessage);
-        return avimMessage;
-    }
-
-    SEL method = @selector(getAVIMTypedMessageWithMessage:);
-    return [self callSuperMethod:method withObject:message];
-}
-
-- (XHMessage *)getXHMessageByMsg:(AVIMTypedMessage *)message {
-    if (message.redpacket) {
-        id<CDUserModelDelegate> fromUser = [[CDChatManager manager].userDelegate getUserById:message.clientId];
-        XHMessage *xhMessage = [RedpacketMessage messageWithRedpacket:message.redpacket];
-        xhMessage.avator = nil;
-        xhMessage.avatorUrl = [fromUser avatarUrl];
-        
-        if ([[CDChatManager manager].clientId isEqualToString:message.clientId]) {
-            xhMessage.bubbleMessageType = XHBubbleMessageTypeSending;
-        } else {
-            xhMessage.bubbleMessageType = XHBubbleMessageTypeReceiving;
-        }
-        NSInteger msgStatuses[4] = { AVIMMessageStatusSending, AVIMMessageStatusSent, AVIMMessageStatusDelivered, AVIMMessageStatusFailed };
-        NSInteger xhMessageStatuses[4] = { XHMessageStatusSending, XHMessageStatusSent, XHMessageStatusReceived, XHMessageStatusFailed };
-        
-        if (xhMessage.bubbleMessageType == XHBubbleMessageTypeSending) {
-            XHMessageStatus status = XHMessageStatusReceived;
-            int i;
-            for (i = 0; i < 4; i++) {
-                if (msgStatuses[i] == message.status) {
-                    status = xhMessageStatuses[i];
-                    break;
-                }
-            }
-            xhMessage.status = status;
-        } else {
-            xhMessage.status = XHMessageStatusReceived;
-        }
-        return xhMessage;
-    }
-    
-    return [self callSuperMethod:@selector(getXHMessageByMsg:) withObject:message];
 }
 
 #pragma mark - 红包功能显示界面处理

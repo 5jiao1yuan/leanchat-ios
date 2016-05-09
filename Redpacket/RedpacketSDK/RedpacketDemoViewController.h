@@ -6,8 +6,8 @@
 //  Copyright © 2016年 云帐户. All rights reserved.
 //
 
-#import "CDChatVC.h"
+#import "RedpacketHackViewController.h"
 
-@interface RedpacketDemoViewController : CDChatVC
+@interface RedpacketDemoViewController : RedpacketHackViewController
 
 @end
