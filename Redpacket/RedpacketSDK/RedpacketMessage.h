@@ -31,7 +31,7 @@
 @property (nonatomic, readonly, strong) RedpacketMessageModel *redpacket;
 
 + (instancetype)messageWithRedpacket:(RedpacketMessageModel *)redpacket;
-
+- (BOOL)isRedpacket;
 @end
 
 #pragma mark - AVIMTypedMessage 的红包功能扩展

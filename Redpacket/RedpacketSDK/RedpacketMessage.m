@@ -29,9 +29,13 @@
 
 - (instancetype)initWithRedpacket:(RedpacketMessageModel *)redpacket
 {
-    self = [super init];
+    id<CDUserModelDelegate> selfUser = [[CDChatManager manager].userDelegate getUserById:[AVUser currentUser].objectId];
+    
+    self.sender = [selfUser username];
+    self.timestamp = [NSDate date];
     self.redpacket = redpacket;
-    self.messageMediaType = REDPACKET_TAG;
+    self.messageMediaType = XHBubbleMessageMediaTypeText;
+    self.text = NSLocalizedString(@"当前版本不支持红包消息", @"当前版本不支持红包消息");
     return self;
 }
 
@@ -89,13 +93,21 @@ static NSString *const RedpacketUserDictKey = @"redpacket_user";
     RedpacketMessageModel *redpacket = objc_getAssociatedObject(self, @selector(redpacket));
     if(!redpacket) {
         // 如果是收到的文本消息，会没有 redpacket 对象
-        NSDictionary *rp = self.attributes[RedpacketDictKey];
-        if (rp) {
-            redpacket = [RedpacketMessageModel redpacketMessageModelWithDic:rp];
-            objc_setAssociatedObject(self, @selector(redpacket), redpacket, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        if (self.attributes) {
+            NSDictionary *rp = self.attributes[RedpacketDictKey];
+            if (rp) {
+                redpacket = [RedpacketMessageModel redpacketMessageModelWithDic:rp];
+                objc_setAssociatedObject(self, @selector(redpacket), redpacket, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+            }
         }
     }
     return redpacket;
+}
+
+- (BOOL)isRedpacket
+{
+    NSDictionary *rp = self.attributes[RedpacketDictKey];
+    return (nil != rp);
 }
 
 @end

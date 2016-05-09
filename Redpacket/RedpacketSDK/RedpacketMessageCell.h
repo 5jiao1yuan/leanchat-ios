@@ -7,7 +7,16 @@
 //
 
 #import <LeanChatLib/LeanChatLib.h>
+#import "RedpacketMessage.h"
+
+@class RedpacketMessageCell;
+@protocol RedpacketCellDelegate <NSObject>
+
+- (void)redpacketCell:(RedpacketMessageCell *)cell didTap:(RedpacketMessage *)message;
+
+@end
 
 @interface RedpacketMessageCell : XHMessageTableViewCell
-
+@property (nonatomic, strong, readonly) id<XHMessageModel> message;
+@property (nonatomic, weak, readwrite) id<RedpacketCellDelegate> redpacketDelegate;
 @end
