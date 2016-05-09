@@ -9,6 +9,7 @@
 #import "RedpacketHackViewController.h"
 #import <objc/objc-runtime.h>
 #import "CDFailedMessageStore.h"
+#import "CDSoundManager.h"
 
 @implementation RedpacketHackViewController
 

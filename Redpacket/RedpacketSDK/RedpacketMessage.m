@@ -5,6 +5,8 @@
 //  Created by YANG HONGBO on 2016-5-6.
 //  Copyright © 2016年 云帐户. All rights reserved.
 //
+#import <LeanChatLib/LeanChatLib.h>
+#import "AVIMTextMessage.h"
 
 #import "RedpacketMessage.h"
 
@@ -51,7 +53,7 @@ static NSString *const RedpacketUserDictKey = @"redpacket_user";
 @dynamic attributes;
 + (instancetype)messageWithRedpacket:(RedpacketMessageModel *)redpacket
 {
-    id message = nil;
+    id message = [[self alloc] init];;
     if (redpacket) {
         NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithCapacity:2];
         
@@ -76,7 +78,6 @@ static NSString *const RedpacketUserDictKey = @"redpacket_user";
             attributes[RedpacketUserDictKey] = @{RedpacketUserDictKey : userDict};
         }
         
-        message = [[self alloc] init];
         [message setAttributes:[attributes copy]];
         [message setRedpacket:redpacket];
     }
@@ -176,4 +177,29 @@ static NSString *const RedpacketUserDictKey = @"redpacket_user";
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
+@end
+
+@implementation RedpacketTakenAVIMTypedMessage
++ (instancetype)messageWithAVIMMessage:(AVIMMessage *)avimmessage
+{
+    RedpacketTakenAVIMTypedMessage* message = [self messageWithRedpacket:avimmessage.redpacket];
+    [message performSelector:@selector(setIoType:)
+                  withObject:(__bridge id)(void *)avimmessage.ioType];
+    [message performSelector:@selector(setStatus:)
+                  withObject:(__bridge id)(void *)avimmessage.status];
+    [message performSelector:@selector(setMessageId:)
+                  withObject:avimmessage.messageId];
+    [message performSelector:@selector(setClientId:)
+                  withObject:avimmessage.clientId];
+    [message performSelector:@selector(setConversationId:)
+                  withObject:avimmessage.conversationId];
+    message.content = avimmessage.content;
+    message.sendTimestamp = avimmessage.sendTimestamp;
+    message.deliveredTimestamp = avimmessage.deliveredTimestamp;
+    [message performSelector:@selector(setTransient:)
+                  withObject:(__bridge id)(void *)avimmessage.transient];
+    
+    return message;
+    
+}
 @end

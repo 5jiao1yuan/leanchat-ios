@@ -314,7 +314,11 @@ static CDChatManager *instance;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:payload
                                                          options:0
                                                            error:&error];
-    [RedpacketTakenMessage ]
+    if([RedpacketTakenAVIMMessage isRedpacketTakenMessagePayload:dict]) {
+        RedpacketTakenAVIMTypedMessage *redpacketMessage
+            = [RedpacketTakenAVIMTypedMessage messageWithAVIMMessage:message];
+        [self conversation:conversation didReceiveTypedMessage:redpacketMessage];
+    }
 }
 
 // content : "{\"_lctype\":-1,\"_lctext\":\"sdfdf\"}"  sdk 会解析好

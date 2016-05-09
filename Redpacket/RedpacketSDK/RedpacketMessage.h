@@ -6,11 +6,12 @@
 //  Copyright © 2016年 云帐户. All rights reserved.
 //
 
-#import <LeanChatLib/LeanChatLib.h>
 
-#import "AVIMTextMessage.h"
 #import "RedpacketMessageModel.h"
+#import "XHMessage.h"
 
+@class AVIMMessage;
+@class AVIMTextMessage;
 #pragma mark - 红包相关的宏定义
 #define REDPACKET_TAG 216
 #pragma mark -
@@ -43,4 +44,9 @@
 // 但是不能让所有人都显示红包被抢消息，所以使用自定义通用类型的消息，这样默认的 demo 是不作处理的
 @interface RedpacketTakenAVIMMessage : AVIMMessage
 + (BOOL)isRedpacketTakenMessagePayload:(NSDictionary *)payload;
+@end
+
+// 对于支持红包的程序，则转成 AVIMTypedMessage，这样由 ViewController 转成内部支持 XHMessage
+@interface RedpacketTakenAVIMTypedMessage : AVIMTypedMessage
++ (instancetype)messageWithAVIMMessage:(AVIMMessage *)avimmessage;
 @end
