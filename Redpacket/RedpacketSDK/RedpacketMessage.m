@@ -47,13 +47,15 @@
 // 因为后面抢红包的消息也需要同样的接口，所以把扩展做到 AVIMTypedMessage 上
 // 这是一些通用需要的实现
 static NSString *const RedpacketDictKey = @"redpacket";
+static NSString *const RedpacketTypeDictKey = @"type";
+static NSString *const RedpacketTakenTypeValue = @"redpacket_taken";
 static NSString *const RedpacketUserDictKey = @"redpacket_user";
 
 @implementation AVIMMessage (Redpacket)
 @dynamic attributes;
 + (instancetype)messageWithRedpacket:(RedpacketMessageModel *)redpacket
 {
-    id message = [[self alloc] init];;
+    id message = [self messageWithContent:@"[云红包]"];
     if (redpacket) {
         NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithCapacity:2];
         
@@ -121,7 +123,45 @@ static NSString *const RedpacketUserDictKey = @"redpacket_user";
     return (nil != rp);
 }
 
+- (BOOL)isRedpacketPayload
+{
+    NSData *payload = [self.payload dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error = nil;
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:payload
+                                                         options:0
+                                                           error:&error];
+    NSString *t = dict[RedpacketTypeDictKey];
+    NSDictionary *redpacktDict = dict[RedpacketDictKey];
+    if ([t isEqualToString:RedpacketTakenTypeValue] && redpacktDict) {
+        return YES;
+    }
+    return NO;
+}
 
+- (NSString *)redpacketString
+{
+    if (RedpacketMessageTypeRedpacket == self.redpacket.messageType) {
+        return [NSString stringWithFormat:@"[云红包]%@", self.redpacket.redpacket.redpacketGreeting];
+    }
+    else if (RedpacketMessageTypeTedpacketTakenMessage == self.redpacket.messageType) {
+        /*
+         if([self.redpacket.currentUser.userId isEqualToString:self.redpacketUserInfo.userId]) {
+         // 显示我抢了别人的红包的提示
+         s =[NSString stringWithFormat:@"%@%@%@", // 你领取了 XXX 的红包
+         NSLocalizedString(@"你领取了", @"领取红包消息"),
+         self.redpacketUserInfo.name,
+         NSLocalizedString(@"的红包", @"领取红包消息结尾")
+         ];
+         }
+         else { // 收到了别人抢了我的红包的消息提示
+         s = [NSString stringWithFormat:@"%@%@", // XXX 领取了你的红包
+         self.redpacketUserInfo.name,
+         NSLocalizedString(@"领取了你的红包", @"领取红包消息")];
+         }
+         */
+    }
+    return @"";
+}
 @end
 
 @implementation AVIMTextMessage (Redpacket)
@@ -145,28 +185,12 @@ static NSString *const RedpacketUserDictKey = @"redpacket_user";
 @implementation RedpacketTakenAVIMMessage
 @synthesize redpacket = _redpacket;
 
-+ (BOOL)isRedpacketTakenMessagePayload:(NSDictionary *)payload
-{
-    NSString *t = payload[@"type"];
-    NSDictionary *dict = payload[@"redpacket"];
-    if ([t isEqualToString:@"redpacket_taken"] && dict) {
-        return YES;
-    }
-    return NO;
-}
-
-- (instancetype)init {
-    if ((self = [super init])) {
-    }
-    return self;
-}
-
 - (NSString *)payload
 {
     NSDictionary *dict = [self.redpacket redpacketMessageModelToDic];
     NSMutableDictionary *payload = [NSMutableDictionary dictionaryWithCapacity:2];
-    payload[@"type"] = @"redpacket_taken";
-    payload[@"redpacket"] = dict;
+    payload[RedpacketTypeDictKey] = RedpacketTakenTypeValue;
+    payload[RedpacketDictKey] = dict;
     NSError *error = nil;
     NSData *data = [NSJSONSerialization dataWithJSONObject:payload
                                                    options:NSJSONWritingPrettyPrinted
@@ -202,4 +226,21 @@ static NSString *const RedpacketUserDictKey = @"redpacket_user";
     return message;
     
 }
+
++ (AVIMMessageMediaType)classMediaType
+{
+    return REDPACKET_TAG;
+}
+
++ (void)load {
+    [self registerSubclass];
+}
+
+- (instancetype)init {
+    if ((self = [super init])) {
+        self.mediaType = [[self class] classMediaType];
+    }
+    return self;
+}
+
 @end

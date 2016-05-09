@@ -7,13 +7,14 @@
 //
 
 #import "RedpacketHackViewController.h"
-#import <objc/objc-runtime.h>
 #import "CDFailedMessageStore.h"
 #import "CDSoundManager.h"
 
+@import ObjectiveC;
+
 @implementation RedpacketHackViewController
 
-- (void)sendRedpacketMessage:(RedpacketMessage*)message;
+- (void)sendCustomRedpacketMessage:(RedpacketMessage*)message;
 {
     [self performSelector:@selector(sendMessage:) withObject:message];
     [self finishSendMessageWithBubbleMessageType:XHBubbleMessageMediaTypeText];
@@ -24,14 +25,15 @@
 // 参考:
 // http://stackoverflow.com/questions/20127714/the-infinite-loop-when-using-super-peformselector-method
 // http://stackoverflow.com/questions/16678463/accessing-a-method-in-a-super-class-when-its-not-exposed
-- (id)callSuperMethod:(SEL)method withObject:(id)object
+- (id)callSuperClass:(Class)class method:(SEL)method withObject:(id)object
 {
     struct objc_super mySuper;
     mySuper.receiver = self;
-    mySuper.super_class = [CDChatRoomVC class];
+    mySuper.super_class = class;
     
-    // 另外由于 Xcode 的新要求，必须先把原先的方法强制转成特定的函数指针形式才可以执行
-    return ((id (*)(struct objc_super *, SEL, ...))objc_msgSendSuper)(&mySuper, method, object);
+    // 必须先把原先的方法强制转成特定的函数指针形式才可以执行
+    id ret = ((id (*)(struct objc_super *, SEL, id))objc_msgSendSuper)(&mySuper, method, object);
+    return ret;
 }
 
 - (AVIMTypedMessage *)getAVIMTypedMessageWithMessage:(XHMessage *)message
@@ -43,14 +45,14 @@
             avimMessage = [AVIMTextMessage messageWithRedpacket:r.redpacket];
         }
         else if(RedpacketMessageTypeTedpacketTakenMessage == r.redpacket.messageType) {
-            avimMessage = [RedpacketTakenAVIMMessage messageWithRedpacket:r.redpacket];
+            avimMessage = [RedpacketTakenAVIMTypedMessage messageWithRedpacket:r.redpacket];
         }
         assert(avimMessage);
         return avimMessage;
     }
     
     SEL method = @selector(getAVIMTypedMessageWithMessage:);
-    return [self callSuperMethod:method withObject:message];
+    return [self callSuperClass:[CDChatRoomVC class] method:method withObject:message];
 }
 
 - (void)sendMessage:(XHMessage *)message {
@@ -70,7 +72,7 @@
         [[CDFailedMessageStore store] insertFailedXHMessage:message];
     };
     
-    ((void (*)(id, SEL, ...))objc_msgSend)(self, @selector(sendMessage:success:), message, success, failed);
+    ((void (*)(id, SEL, id, id, id))objc_msgSend)(self, @selector(sendMessage:success:failed:), message, success, failed);
 }
 
 - (XHMessage *)getXHMessageByMsg:(AVIMTypedMessage *)message {
@@ -104,7 +106,10 @@
         return xhMessage;
     }
     
-    return [self callSuperMethod:@selector(getXHMessageByMsg:) withObject:message];
+    id msg = message;
+    return [self callSuperClass:[CDChatRoomVC class]
+                         method:@selector(getXHMessageByMsg:)
+                     withObject:msg];
 }
 
 @end

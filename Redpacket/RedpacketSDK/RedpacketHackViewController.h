@@ -11,6 +11,6 @@
 
 @interface RedpacketHackViewController : CDChatVC
 
-- (void)sendRedpacketMessage:(RedpacketMessage*)message;
+- (void)sendCustomRedpacketMessage:(RedpacketMessage*)message;
 
 @end

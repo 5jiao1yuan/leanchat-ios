@@ -309,12 +309,8 @@ static CDChatManager *instance;
     // 其实一般不用，有特殊的需求时可以考虑优先用 自定义 AVIMTypedMessage 来实现。见 AVIMCustomMessage 类
     
 #pragma mark - 红包被抢消息处理
-    NSData *payload = [message.payload dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *error = nil;
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:payload
-                                                         options:0
-                                                           error:&error];
-    if([RedpacketTakenAVIMMessage isRedpacketTakenMessagePayload:dict]) {
+    
+    if([message isRedpacketPayload]) {
         RedpacketTakenAVIMTypedMessage *redpacketMessage
             = [RedpacketTakenAVIMTypedMessage messageWithAVIMMessage:message];
         [self conversation:conversation didReceiveTypedMessage:redpacketMessage];

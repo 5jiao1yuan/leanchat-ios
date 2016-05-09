@@ -107,16 +107,16 @@ static NSString *const RedpacketTakenMessageTipCellSenderIdentifier = @"Redpacke
     RedpacketMessage *message = [RedpacketMessage messageWithRedpacket:redpacket];
     assert(message);
     
-    [self sendRedpacketMessage:message];
+    [self sendCustomRedpacketMessage:message];
 }
 
 // 红包被抢消息处理
 - (void)onRedpacketTakenMessage:(RedpacketMessageModel *)redpacket
 {
-    AVIMMessage *m = [AVIMMessage messageWithRedpacket:redpacket];
+    AVIMMessage *m = [RedpacketTakenAVIMMessage messageWithRedpacket:redpacket];
     [self.conversation sendMessage:m
                           callback:^(BOOL succeeded, NSError *error) {
-                              
+                              id mm = m;
                           }];
 }
 
@@ -207,10 +207,10 @@ static NSString *const RedpacketTakenMessageTipCellSenderIdentifier = @"Redpacke
 {
     if (0 == index) { // 红包功能
         int c = (int)self.conversation.members.count;
-        if (1 == c) {
+        if (2 == c) {
             [self.redpacketControl presentRedPacketViewController];
         }
-        else if(c > 1) {
+        else if(c > 2) {
             [self.redpacketControl presentRedPacketMoreViewControllerWithCount:c];
         }
     }

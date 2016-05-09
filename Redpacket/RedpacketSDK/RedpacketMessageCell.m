@@ -8,7 +8,7 @@
 
 #import "RedpacketMessageCell.h"
 
-#import <objc/objc-runtime.h>
+@import ObjectiveC;
 
 #define Redpacket_Message_Font_Size 14
 #define Redpacket_SubMessage_Font_Size 12
