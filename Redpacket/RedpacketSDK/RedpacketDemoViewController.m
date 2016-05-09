@@ -113,9 +113,11 @@ static NSString *const RedpacketTakenMessageTipCellSenderIdentifier = @"Redpacke
 // 红包被抢消息处理
 - (void)onRedpacketTakenMessage:(RedpacketMessageModel *)redpacket
 {
-    RedpacketMessage *message = [RedpacketMessage messageWithRedpacket:redpacket];
-    assert(message);
-    [self performSelector:@selector(sendMessage:) withObject:message];
+    AVIMMessage *m = [AVIMMessage messageWithRedpacket:redpacket];
+    [self.conversation sendMessage:m
+                          callback:^(BOOL succeeded, NSError *error) {
+                              
+                          }];
 }
 
 #pragma mark - 红包功能显示界面处理

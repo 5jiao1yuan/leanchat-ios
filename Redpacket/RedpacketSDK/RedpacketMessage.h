@@ -26,10 +26,9 @@
 
 @end
 
-@interface AVIMTypedMessage (Redpacket)
-
+@interface AVIMMessage (Redpacket)
+@property(nonatomic, strong)NSDictionary *attributes;
 @property (nonatomic, readonly, strong) RedpacketMessageModel *redpacket;
-
 + (instancetype)messageWithRedpacket:(RedpacketMessageModel *)redpacket;
 - (BOOL)isRedpacket;
 @end
@@ -41,7 +40,7 @@
 @end
 
 #pragma mark - 自定义的抢红包消息
-// 但是不能让所有人都显示红包被抢消息，所以使用自定义的消息类型
-@interface RedpacketTakenAVIMMessage : AVIMTypedMessage <AVIMTypedMessageSubclassing>
-
+// 但是不能让所有人都显示红包被抢消息，所以使用自定义通用类型的消息，这样默认的 demo 是不作处理的
+@interface RedpacketTakenAVIMMessage : AVIMMessage
++ (BOOL)isRedpacketTakenMessagePayload:(NSDictionary *)payload;
 @end

@@ -47,8 +47,8 @@
 static NSString *const RedpacketDictKey = @"redpacket";
 static NSString *const RedpacketUserDictKey = @"redpacket_user";
 
-@implementation AVIMTypedMessage (Redpacket)
-
+@implementation AVIMMessage (Redpacket)
+@dynamic attributes;
 + (instancetype)messageWithRedpacket:(RedpacketMessageModel *)redpacket
 {
     id message = nil;
@@ -104,11 +104,22 @@ static NSString *const RedpacketUserDictKey = @"redpacket_user";
     return redpacket;
 }
 
+- (void)setAttributes:(NSDictionary *)attributes
+{
+    objc_setAssociatedObject(self, @selector(attributes), attributes, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSDictionary *)attributes
+{
+    return objc_getAssociatedObject(self, @selector(attributes));
+}
+
 - (BOOL)isRedpacket
 {
     NSDictionary *rp = self.attributes[RedpacketDictKey];
     return (nil != rp);
 }
+
 
 @end
 
@@ -133,20 +144,36 @@ static NSString *const RedpacketUserDictKey = @"redpacket_user";
 @implementation RedpacketTakenAVIMMessage
 @synthesize redpacket = _redpacket;
 
-+ (AVIMMessageMediaType)classMediaType
++ (BOOL)isRedpacketTakenMessagePayload:(NSDictionary *)payload
 {
-    return REDPACKET_TAG;
-}
-
-+ (void)load {
-    [self registerSubclass];
+    NSString *t = payload[@"type"];
+    NSDictionary *dict = payload[@"redpacket"];
+    if ([t isEqualToString:@"redpacket_taken"] && dict) {
+        return YES;
+    }
+    return NO;
 }
 
 - (instancetype)init {
     if ((self = [super init])) {
-        self.mediaType = [[self class] classMediaType];
     }
     return self;
+}
+
+- (NSString *)payload
+{
+    NSDictionary *dict = [self.redpacket redpacketMessageModelToDic];
+    NSMutableDictionary *payload = [NSMutableDictionary dictionaryWithCapacity:2];
+    payload[@"type"] = @"redpacket_taken";
+    payload[@"redpacket"] = dict;
+    NSError *error = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:payload
+                                                   options:NSJSONWritingPrettyPrinted
+                                                     error:&error];
+    if (error) {
+        NSLog(@"cannot convert payload to json :%@", payload);
+    }
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
 @end

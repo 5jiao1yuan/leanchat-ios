@@ -13,6 +13,7 @@
 #import "CDFailedMessageStore.h"
 #import "CDMacros.h"
 #import "CDChatManager_Internal.h"
+#import "RedpacketMessage.h"
 
 static CDChatManager *instance;
 
@@ -306,6 +307,14 @@ static CDChatManager *instance;
     // 不做处理，此应用没有用到
     // 可以看做跟 AVIMTypedMessage 两个频道。构造消息和收消息的接口都不一样，互不干扰。
     // 其实一般不用，有特殊的需求时可以考虑优先用 自定义 AVIMTypedMessage 来实现。见 AVIMCustomMessage 类
+    
+#pragma mark - 红包被抢消息处理
+    NSData *payload = [message.payload dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error = nil;
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:payload
+                                                         options:0
+                                                           error:&error];
+    [RedpacketTakenMessage ]
 }
 
 // content : "{\"_lctype\":-1,\"_lctext\":\"sdfdf\"}"  sdk 会解析好
