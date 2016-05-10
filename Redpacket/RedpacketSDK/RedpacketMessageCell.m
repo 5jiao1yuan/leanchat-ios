@@ -49,26 +49,10 @@ static const CGFloat kXHPeerNameLabelHeight = 20.0f;
         self.messageContentView = self.contentView;
         [self.messageBubbleView removeFromSuperview];
         [self performSelector:@selector(setMessageBubbleView:) withObject:nil];
-        
-        CGFloat bubbleX = 0.0f;
-        CGFloat offsetX = 0.0f;
-        CGFloat bubbleViewHeight = [[self class] getBubbleSize].height;
-        CGFloat bubbleViewY;
-        
-        if (message.bubbleMessageType == XHBubbleMessageTypeReceiving) {
-            bubbleX = kXHAvatorImageSize + 2 * kXHAvatorPaddingX;
-            bubbleViewY = CGRectGetMinY(self.avatorButton.frame) + kXHBubbleMessageViewTopPadding;
-        } else {
-            offsetX = kXHAvatorImageSize + 2 * kXHAvatorPaddingX;
-            bubbleViewY = CGRectGetMinY(self.avatorButton.frame) + kXHBubbleMessageViewTopPadding + kXHPeerNameLabelHeight;
-        }
-        
-        CGRect frame = CGRectMake(bubbleX,
-                                  bubbleViewY,
-                                  self.contentView.frame.size.width - bubbleX - offsetX,
-                                  bubbleViewHeight);
+
         // 设置背景
-        self.bubbleBackgroundView = [[UIImageView alloc] initWithFrame:frame];
+        self.bubbleBackgroundView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        self.bubbleBackgroundView.autoresizingMask = UIViewAutoresizingNone;
         [self.messageContentView addSubview:self.bubbleBackgroundView];
         
         [self initialize];
@@ -183,6 +167,38 @@ static const CGFloat kXHPeerNameLabelHeight = 20.0f;
         UIImage *image = [UIImage imageNamed:REDPACKET_BUNDLE(@"redpacket_sender_bg")];
         self.bubbleBackgroundView.image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(70, 9, 25, 20)];
     }
+    
+    [self setNeedsLayout];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    CGFloat bubbleX = 0.0f;
+    CGFloat offsetX = 0.0f;
+    if (self.message.bubbleMessageType == XHBubbleMessageTypeReceiving) {
+        bubbleX = kXHAvatorImageSize + 2 * kXHAvatorPaddingX;
+    } else {
+        offsetX = kXHAvatorImageSize + 2 * kXHAvatorPaddingX;
+    }
+    
+    CGFloat bubbleViewY;
+    
+    CGSize bubbleViewSize = [[self class] getBubbleSize];
+    
+    if (self.message.bubbleMessageType == XHBubbleMessageTypeReceiving) {
+        bubbleX = kXHAvatorImageSize + 2 * kXHAvatorPaddingX;
+        bubbleViewY = CGRectGetMinY(self.avatorButton.frame) + kXHBubbleMessageViewTopPadding;
+    } else {
+        bubbleX = self.contentView.frame.size.width - bubbleViewSize.width -kXHAvatorImageSize - 2 * kXHAvatorPaddingX;
+        bubbleViewY = CGRectGetMinY(self.avatorButton.frame) + kXHBubbleMessageViewTopPadding + kXHPeerNameLabelHeight;
+    }
+    
+    CGRect frame = CGRectMake(bubbleX,
+                              bubbleViewY,
+                              bubbleViewSize.width,
+                              bubbleViewSize.height);
+    self.bubbleBackgroundView.frame = frame;
 }
 
 - (void)tap:(UITapGestureRecognizer *)gesture {
