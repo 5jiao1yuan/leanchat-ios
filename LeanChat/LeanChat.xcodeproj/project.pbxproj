@@ -1128,7 +1128,7 @@
 					"-framework",
 					"\"UIKit\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.avoscloud.leanchat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.redpacket.LeanCloudDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Redpacket/RedpacketLib $(PROJECT_DIR)/../Redpacket/RedpacketSDK";
@@ -1218,9 +1218,9 @@
 					"-framework",
 					"\"UIKit\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.avoscloud.leanchat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.redpacket.LeanCloudDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "79201b87-4bb0-4b8a-93e7-f5951b287708";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Redpacket/RedpacketLib $(PROJECT_DIR)/../Redpacket/RedpacketSDK";
 			};
 			name = Release;
