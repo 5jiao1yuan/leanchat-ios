@@ -222,14 +222,7 @@ static const CGFloat kXHPeerNameLabelHeight = 20.0f;
                         displaysTimestamp:(BOOL)displayTimestamp
                          displaysPeerName:(BOOL)displayPeerName
 {
-    if([message isKindOfClass:[RedpacketMessage class]]) {
-        return [self getBubbleSize].height + 40;
-    }
-    else {
-        return [super calculateCellHeightWithMessage:message
-                                   displaysTimestamp:displayTimestamp
-                                    displaysPeerName:displayPeerName];
-    }
+    return [self getBubbleSize].height + 40;
 }
 
 @end

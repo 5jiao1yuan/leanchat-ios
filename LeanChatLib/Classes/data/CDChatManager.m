@@ -196,6 +196,14 @@ static CDChatManager *instance;
 #pragma mark - utils
 
 - (void)sendMessage:(AVIMTypedMessage*)message conversation:(AVIMConversation *)conversation callback:(AVBooleanResultBlock)block {
+    // 必须保持 AVIMTypedMessage 与 XHMessage 位置一致，所以需要一个假的消息来占位
+    // 但是发送用的是 RedpacketTakenAVIMMessage
+    if ([message isKindOfClass:[RedpacketTakenAVIMTypedMessage class]]) {
+        if(block) {
+            block(YES, nil);
+        }
+        return;
+    }
     id<CDUserModelDelegate> selfUser = [[CDChatManager manager].userDelegate getUserById:self.clientId];
     NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
     // 云代码中获取到用户名，来设置推送消息, 老王:今晚约吗？
@@ -310,10 +318,8 @@ static CDChatManager *instance;
     
 #pragma mark - 红包被抢消息处理
     
-    if([message isRedpacketPayload]) {
-        RedpacketTakenAVIMTypedMessage *redpacketMessage
-            = [RedpacketTakenAVIMTypedMessage messageWithAVIMMessage:message];
-        [self conversation:conversation didReceiveTypedMessage:redpacketMessage];
+    if([message isRedpacket]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kCDNotificationMessageReceived object:message];
     }
 }
 

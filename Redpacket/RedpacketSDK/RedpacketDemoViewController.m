@@ -147,7 +147,7 @@ static NSString *const RedpacketTakenMessageTipCellSenderIdentifier = @"Redpacke
                     redpacketCell.redpacketDelegate = self;
                     messageTableViewCell = redpacketCell;
                 }
-                else {
+                else { // RedpacketMessageTypeTedpacketTakenMessage
                     RedpacketTakenMessageTipCell *redpacketCell = [tableView dequeueReusableCellWithIdentifier:RedpacketTakenMessageTipCellReceiverIdentifier];
                     if (!redpacketCell) {
                         redpacketCell = [[RedpacketTakenMessageTipCell alloc] initWithMessage:message
@@ -181,7 +181,12 @@ static NSString *const RedpacketTakenMessageTipCellSenderIdentifier = @"Redpacke
         }
         
         messageTableViewCell.indexPath = indexPath;
-        [messageTableViewCell configureCellWithMessage:message displaysTimestamp:displayTimestamp displaysPeerName:displayPeerName];
+        if (RedpacketMessageTypeTedpacketTakenMessage == redpacketMessage.redpacket.messageType) {
+            [messageTableViewCell configureCellWithMessage:message displaysTimestamp:NO displaysPeerName:NO];
+        }
+        else {
+            [messageTableViewCell configureCellWithMessage:message displaysTimestamp:displayTimestamp displaysPeerName:displayPeerName];
+        }
         [messageTableViewCell setBackgroundColor:tableView.backgroundColor];
         
         if ([self.delegate respondsToSelector:@selector(configureCell:atIndexPath:)]) {
