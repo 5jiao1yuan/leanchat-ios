@@ -26,6 +26,8 @@ static const CGFloat kXHBubbleMessageViewTopPadding = 0;
 static const CGFloat kXHBubbleMessageViewBottomPadding = 8;
 static const CGFloat kXHPeerNameLabelHeight = 20.0f;
 
+#define kPeerNameZoneHeight(displayPeerName)  (displayPeerName ? kXHPeerNameLabelHeight : 0)
+
 @interface RedpacketMessageCell ()
 @property(strong, nonatomic) UILabel *greetingLabel;
 @property(strong, nonatomic) UILabel *subLabel; // 显示 "查看红包"
@@ -47,8 +49,7 @@ static const CGFloat kXHPeerNameLabelHeight = 20.0f;
     if (self) {
         self.message = message;
         self.messageContentView = self.contentView;
-        [self.messageBubbleView removeFromSuperview];
-        [self performSelector:@selector(setMessageBubbleView:) withObject:nil];
+        self.messageBubbleView.hidden = YES;
 
         // 设置背景
         self.bubbleBackgroundView = [[UIImageView alloc] initWithFrame:CGRectZero];
@@ -188,7 +189,7 @@ static const CGFloat kXHPeerNameLabelHeight = 20.0f;
     
     if (self.message.bubbleMessageType == XHBubbleMessageTypeReceiving) {
         bubbleX = kXHAvatorImageSize + 2 * kXHAvatorPaddingX;
-        bubbleViewY = CGRectGetMinY(self.avatorButton.frame) + kXHBubbleMessageViewTopPadding;
+        bubbleViewY = CGRectGetMinY(self.avatorButton.frame) + kXHBubbleMessageViewTopPadding + kXHPeerNameLabelHeight;
     } else {
         bubbleX = self.contentView.frame.size.width - bubbleViewSize.width -kXHAvatorImageSize - 2 * kXHAvatorPaddingX;
         bubbleViewY = CGRectGetMinY(self.avatorButton.frame) + kXHBubbleMessageViewTopPadding + kXHPeerNameLabelHeight;

@@ -100,8 +100,8 @@ static NSString *const RedpacketTakenMessageTipCellSenderIdentifier = @"Redpacke
 }
 
 
-#pragma mark - 融云消息与红包插件消息转换与处理
-// 发送融云红包消息
+#pragma mark - 消息与红包插件消息转换与处理
+// 发送红包消息
 - (void)sendRedpacketMessage:(RedpacketMessageModel *)redpacket
 {
     RedpacketMessage *message = [RedpacketMessage messageWithRedpacket:redpacket];
@@ -160,6 +160,7 @@ static NSString *const RedpacketTakenMessageTipCellSenderIdentifier = @"Redpacke
                 }
                 break;
             case XHBubbleMessageTypeSending:
+                displayPeerName = NO;
                 if (RedpacketMessageTypeRedpacket == redpacketMessage.redpacket.messageType) {
                     RedpacketMessageCell *redpacketCell = [tableView dequeueReusableCellWithIdentifier:RedpacketMessageCellSenderIdentifier];
                     if (!redpacketCell) {
