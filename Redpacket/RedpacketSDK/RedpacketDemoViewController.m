@@ -116,8 +116,10 @@ static NSString *const RedpacketTakenMessageTipCellSenderIdentifier = @"Redpacke
     AVIMMessage *m = [RedpacketTakenAVIMMessage messageWithRedpacket:redpacket];
     [self.conversation sendMessage:m
                           callback:^(BOOL succeeded, NSError *error) {
-                              id mm = m;
                           }];
+    AVIMTextMessage *typedMessage = [AVIMTextMessage messageWithAVIMMessage:m];
+    SEL method = @selector(insertMessage:);
+    [self callVoidSuperClass:[CDChatRoomVC class] method:method withObject:typedMessage];
 }
 
 #pragma mark - 红包功能显示界面处理

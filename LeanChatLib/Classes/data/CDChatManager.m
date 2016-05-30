@@ -244,6 +244,12 @@ static CDChatManager *instance;
             if ([message isKindOfClass:[AVIMTypedMessage class]]) {
                 [typedMessages addObject:message];
             }
+            else if([message isKindOfClass:[AVIMMessage class]]) {
+                if ([message isRedpacket]) {
+                    RedpacketTakenAVIMMessage *m = [RedpacketTakenAVIMTypedMessage messageWithAVIMMessage:message];
+                    [typedMessages addObject:m];
+                }
+            }
         }
         block(typedMessages, error);
     };
@@ -319,7 +325,8 @@ static CDChatManager *instance;
 #pragma mark - 红包被抢消息处理
     
     if([message isRedpacket]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kCDNotificationMessageReceived object:message];
+        AVIMTextMessage *m = [AVIMTextMessage messageWithAVIMMessage:message];
+        [self receiveMessage:m conversation:conversation];
     }
 }
 

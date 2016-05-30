@@ -14,6 +14,8 @@
 #import "CDChatManager.h"
 #import <objc/runtime.h>
 
+@import ObjectiveC;
+
 static NSString *const RedpacketDictKey = @"redpacket";
 static NSString *const RedpacketTypeDictKey = @"type";
 static NSString *const RedpacketTakenTypeValue = @"redpacket_taken";
@@ -274,8 +276,48 @@ static NSString *const RedpacketUserNameKey = @"username";
     message.sendTimestamp = avimmessage.sendTimestamp;
     message.deliveredTimestamp = avimmessage.deliveredTimestamp;
     message.redpacketPayload = avimmessage.redpacketPayload;
+
+    [message customSetConversationId:avimmessage.conversationId];
+    [message customSetMessageId:avimmessage.messageId];
+    [message customSetClientId:avimmessage.clientId];
+ 
     return message;
+}
+
+- (void)customSetClientId:(NSString *)clientId
+{
+    SEL method = @selector(setClientId:);
+    [self callVoidSuperClass:[AVIMMessage class]
+                      method:method
+                  withObject:clientId];
+}
+     
+- (void)customSetMessageId:(NSString *)messageId
+{
+    SEL method = @selector(setMessageId:);
+    [self callVoidSuperClass:[AVIMMessage class]
+                      method:method
+                  withObject:messageId];
+}
+
+- (void)customSetConversationId:(NSString *)conversationId
+{
+    SEL method = @selector(setConversationId:);
+    [self callVoidSuperClass:[AVIMMessage class]
+                      method:method
+                  withObject:conversationId];
+}
+
+- (void)callVoidSuperClass:(Class)class method:(SEL)method withObject:(id)object
+{
+    struct objc_super mySuper;
+    mySuper.receiver = self;
+    mySuper.super_class = class;
     
+    // 必须先把原先的方法强制转成特定的函数指针形式才可以执行
+    // 必须对应参数的类型，不能使用强制转换的类型（因为 ARC 会使编译器对 ObjectiveC 对象 进行 retain/release 操作，如果参数为标量
+    // 则必须将参数类型指明，否则引起异常
+    ((void (*)(struct objc_super *, SEL, id))objc_msgSendSuper)(&mySuper, method, object);
 }
 
 + (AVIMMessageMediaType)classMediaType

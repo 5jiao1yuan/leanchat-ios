@@ -66,97 +66,6 @@
     [self finishSendMessageWithBubbleMessageType:XHBubbleMessageMediaTypeText];
 }
 
-- (void)receiveMessage:(NSNotification *)notification {
-    AVIMMessage *message = notification.object;
-    if([message isKindOfClass:[AVIMMessage class]]
-       && [message isRedpacket]) {
-        [self insertMessage:(AVIMTypedMessage *)notification.object];
-    }
-    else {
-        [self callVoidSuperClass:[CDChatRoomVC class]
-                          method:@selector(receiveMessage:)
-                      withObject:notification];
-    }
-}
-
-// 基类的方法使用的是 self.avimTypedMessage 作为计数，需要改为使用 self.messages 作为计数
-- (void)insertMessage:(AVIMTypedMessage *)message {
-    if (self.loadingMoreMessage) {
-        return;
-    }
-    self.loadingMoreMessage = YES;
-    NSArray *messages = @[message];
-    void (^callback)(BOOL succeeded, NSError *error) = ^(BOOL succeeded, NSError *error) {
-        struct objc_super mySuper;
-        mySuper.receiver = self;
-        mySuper.super_class = [CDChatRoomVC class];
-        BOOL result = ((BOOL (*)(struct objc_super *, SEL, id))objc_msgSendSuper)(&mySuper, @selector(filterError:), error);
-        if (result) {
-            XHMessage *xhMessage = [self getXHMessageByMsg:message];
-            [self.messages addObject:xhMessage];
-            // avimTypedMessage 的消息必须与 xhMessage 消息一致，否则一些内部操作会错位 
-            NSMutableArray *avimTypedMessage = [self performSelector:@selector(avimTypedMessage)];
-            RedpacketTakenAVIMTypedMessage *m = [RedpacketTakenAVIMTypedMessage messageWithAVIMMessage:message];
-            [avimTypedMessage addObject:m];
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.messages.count -1 inSection:0];
-            [self.messageTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            [self scrollToBottomAnimated:YES];
-        }
-        self.loadingMoreMessage = NO;
-    };
-    
-    [self callVoidSuperClass:[CDChatRoomVC class]
-                      method:@selector(runInGlobalQueue:)
-                  withObject:^{
-                      NSMutableSet *userIds = [[NSMutableSet alloc] init];
-                      for (AVIMTypedMessage *message in messages) {
-                          [userIds addObject:message.clientId];
-                          if ([message isMemberOfClass:[AVIMMessage class]]) {
-                              
-                          }
-                          else {
-                              if (message.mediaType == kAVIMMessageMediaTypeImage || message.mediaType == kAVIMMessageMediaTypeAudio) {
-                                  AVFile *file = message.file;
-                                  if (file && file.isDataAvailable == NO) {
-                                      NSError *error;
-                                      // 下载到本地
-                                      NSData *data = [file getData:&error];
-                                      if (error || data == nil) {
-                                          DLog(@"download file error : %@", error);
-                                      }
-                                  }
-                              } else if (message.mediaType == kAVIMMessageMediaTypeVideo) {
-                                  NSString *path = [[CDChatManager manager] videoPathOfMessag:(AVIMVideoMessage *)message];
-                                  if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
-                                      NSError *error;
-                                      NSData *data = [message.file getData:&error];
-                                      if (error) {
-                                          DLog(@"download file error : %@", error);
-                                      } else {
-                                          [data writeToFile:path atomically:YES];
-                                      }
-                                  }
-                              }
-                          }
-                      }
-                      if ([[CDChatManager manager].userDelegate respondsToSelector:@selector(cacheUserByIds:block:)]) {
-                          [[CDChatManager manager].userDelegate cacheUserByIds:userIds block:^(BOOL succeeded, NSError *error) {
-                              [self callVoidSuperClass:[CDChatRoomVC class]
-                                                method:@selector(runInMainQueue:)
-                                            withObject:^{
-                                                !callback ?: callback(succeeded, error);
-                                            }];
-                          }];
-                      } else {
-                          [self callVoidSuperClass:[CDChatRoomVC class]
-                                            method:@selector(runInMainQueue:)
-                                        withObject:^{
-                                            callback(YES, nil);
-                                        }];
-                      }
-                  }];
-}
-
 - (AVIMTypedMessage *)getAVIMTypedMessageWithMessage:(XHMessage *)message
 {
     if ([message isKindOfClass:[RedpacketMessage class]]) {
@@ -198,7 +107,7 @@
 }
 
 - (XHMessage *)getXHMessageByMsg:(AVIMTypedMessage *)message {
-    // 为了处理 抢红包消息，这里传进来的事实上可能是 AVIMMessage
+    // 为了处理 抢红包消息
     if (message.redpacket) {
         id<CDUserModelDelegate> fromUser = [[CDChatManager manager].userDelegate getUserById:message.clientId];
         RedpacketMessage *xhMessage = [RedpacketMessage messageWithRedpacket:message.redpacket];

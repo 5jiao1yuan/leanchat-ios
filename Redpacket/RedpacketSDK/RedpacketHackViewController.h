@@ -12,5 +12,5 @@
 @interface RedpacketHackViewController : CDChatVC
 
 - (void)sendCustomRedpacketMessage:(RedpacketMessage*)message;
-
+- (void)callVoidSuperClass:(Class)class method:(SEL)method withObject:(id)object;
 @end

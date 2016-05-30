@@ -34,6 +34,8 @@
 @property(nonatomic, assign) BOOL redpacketChecked;
 @property (nonatomic, readonly, strong) RedpacketMessageModel *redpacket;
 + (instancetype)messageWithRedpacket:(RedpacketMessageModel *)redpacket;
+// 需要一个 TypedMessage 类型进行本地占位，同时似乎只有 TextTypedMessage 才会被 Conversation 缓存
++ (instancetype)messageWithAVIMMessage:(AVIMMessage *)avimmessage;
 - (BOOL)isRedpacket;
 - (NSString *)redpacketString;
 @end
