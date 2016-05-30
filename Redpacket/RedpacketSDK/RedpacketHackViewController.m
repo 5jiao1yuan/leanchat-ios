@@ -78,7 +78,6 @@
             // 这个类用来占位置，不支持发送
             avimMessage = [RedpacketTakenAVIMTypedMessage messageWithRedpacket:r.redpacket];
         }
-        assert(avimMessage);
         return avimMessage;
     }
     

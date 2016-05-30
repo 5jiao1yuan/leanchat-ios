@@ -325,7 +325,7 @@ static CDChatManager *instance;
 #pragma mark - 红包被抢消息处理
     
     if([message isRedpacket]) {
-        AVIMTextMessage *m = [AVIMTextMessage messageWithAVIMMessage:message];
+        RedpacketTakenAVIMTypedMessage *m = [RedpacketTakenAVIMTypedMessage messageWithAVIMMessage:message];
         [self receiveMessage:m conversation:conversation];
     }
 }

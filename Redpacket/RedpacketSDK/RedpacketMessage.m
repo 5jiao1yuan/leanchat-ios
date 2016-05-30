@@ -214,11 +214,16 @@ static NSString *const RedpacketUserNameKey = @"username";
         NSString *s = nil;
         if([self.redpacket.currentUser.userId isEqualToString:self.redpacket.redpacketReceiver.userId]) {
             // 显示我抢了别人的红包的提示
-            s =[NSString stringWithFormat:@"%@%@%@", // 你领取了 XXX 的红包
-                NSLocalizedString(@"你领取了", @"领取红包消息"),
-                user[RedpacketUserNameKey],
-                NSLocalizedString(@"的红包", @"领取红包消息结尾")
-                ];
+            if ([self.redpacket.redpacketSender.userId isEqualToString:user[RedpacketUserIdKey]]) {
+                s = @"你领取了自己的红包";
+            }
+            else {
+                s =[NSString stringWithFormat:@"%@%@%@", // 你领取了 XXX 的红包
+                    NSLocalizedString(@"你领取了", @"领取红包消息"),
+                    self.redpacket.redpacketSender.userNickname,
+                    NSLocalizedString(@"的红包", @"领取红包消息结尾")
+                    ];
+            }
         }
         else { // 收到了别人抢了我的红包的消息提示
             s = [NSString stringWithFormat:@"%@%@", // XXX 领取了你的红包
