@@ -9,40 +9,7 @@
 /* Begin PBXBuildFile section */
 		1FAD25EBE59E07248BD0F7D5 /* libPods-LeanChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF79D434DB9DF2EFE3DD51B2 /* libPods-LeanChat.a */; };
 		434333DB1CE0B0D10032EDF1 /* libRedpacketLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 434333A41CE0B0D10032EDF1 /* libRedpacketLib.a */; };
-		434333DC1CE0B0D10032EDF1 /* GroupRedpacketDetailHeaderView~iphone.nib in Resources */ = {isa = PBXBuildFile; fileRef = 434333A91CE0B0D10032EDF1 /* GroupRedpacketDetailHeaderView~iphone.nib */; };
-		434333DD1CE0B0D10032EDF1 /* hudError@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333AA1CE0B0D10032EDF1 /* hudError@2x.png */; };
-		434333DE1CE0B0D10032EDF1 /* hudRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333AB1CE0B0D10032EDF1 /* hudRefresh@2x.png */; };
-		434333DF1CE0B0D10032EDF1 /* hudSuccess@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333AC1CE0B0D10032EDF1 /* hudSuccess@2x.png */; };
-		434333E01CE0B0D10032EDF1 /* InComeRedpacketCell~iphone.nib in Resources */ = {isa = PBXBuildFile; fileRef = 434333AD1CE0B0D10032EDF1 /* InComeRedpacketCell~iphone.nib */; };
-		434333E11CE0B0D10032EDF1 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 434333AE1CE0B0D10032EDF1 /* Info.plist */; };
-		434333E21CE0B0D10032EDF1 /* MyInComeHeaderView~iphone.nib in Resources */ = {isa = PBXBuildFile; fileRef = 434333AF1CE0B0D10032EDF1 /* MyInComeHeaderView~iphone.nib */; };
-		434333E31CE0B0D10032EDF1 /* payView_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333B01CE0B0D10032EDF1 /* payView_arrow@2x.png */; };
-		434333E41CE0B0D10032EDF1 /* payView_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333B11CE0B0D10032EDF1 /* payView_close@2x.png */; };
-		434333E51CE0B0D10032EDF1 /* payView_close_high@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333B21CE0B0D10032EDF1 /* payView_close_high@2x.png */; };
-		434333E61CE0B0D10032EDF1 /* redPackert_luckCard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333B31CE0B0D10032EDF1 /* redPackert_luckCard@2x.png */; };
-		434333E71CE0B0D10032EDF1 /* redpacket_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333B41CE0B0D10032EDF1 /* redpacket_background@2x.png */; };
-		434333E81CE0B0D10032EDF1 /* redpacket_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333B51CE0B0D10032EDF1 /* redpacket_header@2x.png */; };
-		434333E91CE0B0D10032EDF1 /* redpacket_help@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333B61CE0B0D10032EDF1 /* redpacket_help@2x.png */; };
-		434333EA1CE0B0D10032EDF1 /* redpacket_help_high@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333B71CE0B0D10032EDF1 /* redpacket_help_high@2x.png */; };
-		434333EB1CE0B0D10032EDF1 /* redpacket_luckyBest@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333B81CE0B0D10032EDF1 /* redpacket_luckyBest@2x.png */; };
-		434333EC1CE0B0D10032EDF1 /* redpacket_navigationbar_return@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333B91CE0B0D10032EDF1 /* redpacket_navigationbar_return@2x.png */; };
-		434333ED1CE0B0D10032EDF1 /* redpacket_navigationbar_return@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333BA1CE0B0D10032EDF1 /* redpacket_navigationbar_return@3x.png */; };
-		434333EE1CE0B0D10032EDF1 /* redpacket_redpacket@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333BB1CE0B0D10032EDF1 /* redpacket_redpacket@2x.png */; };
-		434333EF1CE0B0D10032EDF1 /* redpacket_redpacket_high@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333BC1CE0B0D10032EDF1 /* redpacket_redpacket_high@2x.png */; };
-		434333F01CE0B0D10032EDF1 /* redpacket_redpacketSend_luckBless@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333BD1CE0B0D10032EDF1 /* redpacket_redpacketSend_luckBless@2x.png */; };
-		434333F11CE0B0D10032EDF1 /* RedpacketCell.nib in Resources */ = {isa = PBXBuildFile; fileRef = 434333BE1CE0B0D10032EDF1 /* RedpacketCell.nib */; };
-		434333F21CE0B0D10032EDF1 /* redpacketDetailHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333BF1CE0B0D10032EDF1 /* redpacketDetailHeader@2x.png */; };
-		434333F31CE0B0D10032EDF1 /* redpacketDetailHeader@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434333C01CE0B0D10032EDF1 /* redpacketDetailHeader@3x.png */; };
-		434333F41CE0B0D10032EDF1 /* RedPacketDetailHeaderView~iphone.nib in Resources */ = {isa = PBXBuildFile; fileRef = 434333C11CE0B0D10032EDF1 /* RedPacketDetailHeaderView~iphone.nib */; };
 		434333F51CE0B0D10032EDF1 /* RedPacketResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 434333C21CE0B0D10032EDF1 /* RedPacketResource.bundle */; };
-		434333F61CE0B0D10032EDF1 /* SendRedPacketToMoreViewController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 434333C31CE0B0D10032EDF1 /* SendRedPacketToMoreViewController.nib */; };
-		434333F71CE0B0D10032EDF1 /* SendRedPacketViewController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 434333C41CE0B0D10032EDF1 /* SendRedPacketViewController.nib */; };
-		434333F81CE0B0D10032EDF1 /* Server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 434333C51CE0B0D10032EDF1 /* Server.plist */; };
-		434333F91CE0B0D10032EDF1 /* YZPasswordView~iphone.nib in Resources */ = {isa = PBXBuildFile; fileRef = 434333C61CE0B0D10032EDF1 /* YZPasswordView~iphone.nib */; };
-		434333FA1CE0B0D10032EDF1 /* YZPayTypeView~iphone.nib in Resources */ = {isa = PBXBuildFile; fileRef = 434333C71CE0B0D10032EDF1 /* YZPayTypeView~iphone.nib */; };
-		434333FB1CE0B0D10032EDF1 /* YZPayView~iphone.nib in Resources */ = {isa = PBXBuildFile; fileRef = 434333C81CE0B0D10032EDF1 /* YZPayView~iphone.nib */; };
-		434333FC1CE0B0D10032EDF1 /* YZRedPacketView~iphone.nib in Resources */ = {isa = PBXBuildFile; fileRef = 434333C91CE0B0D10032EDF1 /* YZRedPacketView~iphone.nib */; };
-		434333FD1CE0B0D10032EDF1 /* YZTelphoneValidateView~iphone.nib in Resources */ = {isa = PBXBuildFile; fileRef = 434333CA1CE0B0D10032EDF1 /* YZTelphoneValidateView~iphone.nib */; };
 		434333FE1CE0B0D10032EDF1 /* RedpacketCellResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 434333CE1CE0B0D10032EDF1 /* RedpacketCellResource.bundle */; };
 		434333FF1CE0B0D10032EDF1 /* RedpacketConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 434333D01CE0B0D10032EDF1 /* RedpacketConfig.m */; };
 		434334001CE0B0D10032EDF1 /* RedpacketDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 434333D21CE0B0D10032EDF1 /* RedpacketDemoViewController.m */; };
@@ -132,40 +99,7 @@
 		434333A51CE0B0D10032EDF1 /* RedpacketMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketMessageModel.h; sourceTree = "<group>"; };
 		434333A61CE0B0D10032EDF1 /* RedpacketOpenConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketOpenConst.h; sourceTree = "<group>"; };
 		434333A71CE0B0D10032EDF1 /* RedpacketViewControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketViewControl.h; sourceTree = "<group>"; };
-		434333A91CE0B0D10032EDF1 /* GroupRedpacketDetailHeaderView~iphone.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = "GroupRedpacketDetailHeaderView~iphone.nib"; sourceTree = "<group>"; };
-		434333AA1CE0B0D10032EDF1 /* hudError@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hudError@2x.png"; sourceTree = "<group>"; };
-		434333AB1CE0B0D10032EDF1 /* hudRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hudRefresh@2x.png"; sourceTree = "<group>"; };
-		434333AC1CE0B0D10032EDF1 /* hudSuccess@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hudSuccess@2x.png"; sourceTree = "<group>"; };
-		434333AD1CE0B0D10032EDF1 /* InComeRedpacketCell~iphone.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = "InComeRedpacketCell~iphone.nib"; sourceTree = "<group>"; };
-		434333AE1CE0B0D10032EDF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Info.plist; sourceTree = "<group>"; };
-		434333AF1CE0B0D10032EDF1 /* MyInComeHeaderView~iphone.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = "MyInComeHeaderView~iphone.nib"; sourceTree = "<group>"; };
-		434333B01CE0B0D10032EDF1 /* payView_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "payView_arrow@2x.png"; sourceTree = "<group>"; };
-		434333B11CE0B0D10032EDF1 /* payView_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "payView_close@2x.png"; sourceTree = "<group>"; };
-		434333B21CE0B0D10032EDF1 /* payView_close_high@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "payView_close_high@2x.png"; sourceTree = "<group>"; };
-		434333B31CE0B0D10032EDF1 /* redPackert_luckCard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redPackert_luckCard@2x.png"; sourceTree = "<group>"; };
-		434333B41CE0B0D10032EDF1 /* redpacket_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redpacket_background@2x.png"; sourceTree = "<group>"; };
-		434333B51CE0B0D10032EDF1 /* redpacket_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redpacket_header@2x.png"; sourceTree = "<group>"; };
-		434333B61CE0B0D10032EDF1 /* redpacket_help@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redpacket_help@2x.png"; sourceTree = "<group>"; };
-		434333B71CE0B0D10032EDF1 /* redpacket_help_high@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redpacket_help_high@2x.png"; sourceTree = "<group>"; };
-		434333B81CE0B0D10032EDF1 /* redpacket_luckyBest@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redpacket_luckyBest@2x.png"; sourceTree = "<group>"; };
-		434333B91CE0B0D10032EDF1 /* redpacket_navigationbar_return@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redpacket_navigationbar_return@2x.png"; sourceTree = "<group>"; };
-		434333BA1CE0B0D10032EDF1 /* redpacket_navigationbar_return@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redpacket_navigationbar_return@3x.png"; sourceTree = "<group>"; };
-		434333BB1CE0B0D10032EDF1 /* redpacket_redpacket@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redpacket_redpacket@2x.png"; sourceTree = "<group>"; };
-		434333BC1CE0B0D10032EDF1 /* redpacket_redpacket_high@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redpacket_redpacket_high@2x.png"; sourceTree = "<group>"; };
-		434333BD1CE0B0D10032EDF1 /* redpacket_redpacketSend_luckBless@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redpacket_redpacketSend_luckBless@2x.png"; sourceTree = "<group>"; };
-		434333BE1CE0B0D10032EDF1 /* RedpacketCell.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = RedpacketCell.nib; sourceTree = "<group>"; };
-		434333BF1CE0B0D10032EDF1 /* redpacketDetailHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redpacketDetailHeader@2x.png"; sourceTree = "<group>"; };
-		434333C01CE0B0D10032EDF1 /* redpacketDetailHeader@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redpacketDetailHeader@3x.png"; sourceTree = "<group>"; };
-		434333C11CE0B0D10032EDF1 /* RedPacketDetailHeaderView~iphone.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = "RedPacketDetailHeaderView~iphone.nib"; sourceTree = "<group>"; };
 		434333C21CE0B0D10032EDF1 /* RedPacketResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RedPacketResource.bundle; sourceTree = "<group>"; };
-		434333C31CE0B0D10032EDF1 /* SendRedPacketToMoreViewController.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = SendRedPacketToMoreViewController.nib; sourceTree = "<group>"; };
-		434333C41CE0B0D10032EDF1 /* SendRedPacketViewController.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = SendRedPacketViewController.nib; sourceTree = "<group>"; };
-		434333C51CE0B0D10032EDF1 /* Server.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Server.plist; sourceTree = "<group>"; };
-		434333C61CE0B0D10032EDF1 /* YZPasswordView~iphone.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = "YZPasswordView~iphone.nib"; sourceTree = "<group>"; };
-		434333C71CE0B0D10032EDF1 /* YZPayTypeView~iphone.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = "YZPayTypeView~iphone.nib"; sourceTree = "<group>"; };
-		434333C81CE0B0D10032EDF1 /* YZPayView~iphone.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = "YZPayView~iphone.nib"; sourceTree = "<group>"; };
-		434333C91CE0B0D10032EDF1 /* YZRedPacketView~iphone.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = "YZRedPacketView~iphone.nib"; sourceTree = "<group>"; };
-		434333CA1CE0B0D10032EDF1 /* YZTelphoneValidateView~iphone.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = "YZTelphoneValidateView~iphone.nib"; sourceTree = "<group>"; };
 		434333CB1CE0B0D10032EDF1 /* YZHRedpacketBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZHRedpacketBridge.h; sourceTree = "<group>"; };
 		434333CC1CE0B0D10032EDF1 /* YZHRedpacketBridgeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZHRedpacketBridgeProtocol.h; sourceTree = "<group>"; };
 		434333CE1CE0B0D10032EDF1 /* RedpacketCellResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RedpacketCellResource.bundle; sourceTree = "<group>"; };
@@ -363,40 +297,7 @@
 		434333A81CE0B0D10032EDF1 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				434333A91CE0B0D10032EDF1 /* GroupRedpacketDetailHeaderView~iphone.nib */,
-				434333AA1CE0B0D10032EDF1 /* hudError@2x.png */,
-				434333AB1CE0B0D10032EDF1 /* hudRefresh@2x.png */,
-				434333AC1CE0B0D10032EDF1 /* hudSuccess@2x.png */,
-				434333AD1CE0B0D10032EDF1 /* InComeRedpacketCell~iphone.nib */,
-				434333AE1CE0B0D10032EDF1 /* Info.plist */,
-				434333AF1CE0B0D10032EDF1 /* MyInComeHeaderView~iphone.nib */,
-				434333B01CE0B0D10032EDF1 /* payView_arrow@2x.png */,
-				434333B11CE0B0D10032EDF1 /* payView_close@2x.png */,
-				434333B21CE0B0D10032EDF1 /* payView_close_high@2x.png */,
-				434333B31CE0B0D10032EDF1 /* redPackert_luckCard@2x.png */,
-				434333B41CE0B0D10032EDF1 /* redpacket_background@2x.png */,
-				434333B51CE0B0D10032EDF1 /* redpacket_header@2x.png */,
-				434333B61CE0B0D10032EDF1 /* redpacket_help@2x.png */,
-				434333B71CE0B0D10032EDF1 /* redpacket_help_high@2x.png */,
-				434333B81CE0B0D10032EDF1 /* redpacket_luckyBest@2x.png */,
-				434333B91CE0B0D10032EDF1 /* redpacket_navigationbar_return@2x.png */,
-				434333BA1CE0B0D10032EDF1 /* redpacket_navigationbar_return@3x.png */,
-				434333BB1CE0B0D10032EDF1 /* redpacket_redpacket@2x.png */,
-				434333BC1CE0B0D10032EDF1 /* redpacket_redpacket_high@2x.png */,
-				434333BD1CE0B0D10032EDF1 /* redpacket_redpacketSend_luckBless@2x.png */,
-				434333BE1CE0B0D10032EDF1 /* RedpacketCell.nib */,
-				434333BF1CE0B0D10032EDF1 /* redpacketDetailHeader@2x.png */,
-				434333C01CE0B0D10032EDF1 /* redpacketDetailHeader@3x.png */,
-				434333C11CE0B0D10032EDF1 /* RedPacketDetailHeaderView~iphone.nib */,
 				434333C21CE0B0D10032EDF1 /* RedPacketResource.bundle */,
-				434333C31CE0B0D10032EDF1 /* SendRedPacketToMoreViewController.nib */,
-				434333C41CE0B0D10032EDF1 /* SendRedPacketViewController.nib */,
-				434333C51CE0B0D10032EDF1 /* Server.plist */,
-				434333C61CE0B0D10032EDF1 /* YZPasswordView~iphone.nib */,
-				434333C71CE0B0D10032EDF1 /* YZPayTypeView~iphone.nib */,
-				434333C81CE0B0D10032EDF1 /* YZPayView~iphone.nib */,
-				434333C91CE0B0D10032EDF1 /* YZRedPacketView~iphone.nib */,
-				434333CA1CE0B0D10032EDF1 /* YZTelphoneValidateView~iphone.nib */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -788,44 +689,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7073FCB31B14718C006F2692 /* CDConvNameVC.xib in Resources */,
-				434333DF1CE0B0D10032EDF1 /* hudSuccess@2x.png in Resources */,
-				434333ED1CE0B0D10032EDF1 /* redpacket_navigationbar_return@3x.png in Resources */,
-				434333EF1CE0B0D10032EDF1 /* redpacket_redpacket_high@2x.png in Resources */,
-				434333FD1CE0B0D10032EDF1 /* YZTelphoneValidateView~iphone.nib in Resources */,
-				434333F41CE0B0D10032EDF1 /* RedPacketDetailHeaderView~iphone.nib in Resources */,
-				434333DD1CE0B0D10032EDF1 /* hudError@2x.png in Resources */,
 				7073FCBB1B14718C006F2692 /* CDAddFriendVC.xib in Resources */,
-				434333F11CE0B0D10032EDF1 /* RedpacketCell.nib in Resources */,
-				434333F71CE0B0D10032EDF1 /* SendRedPacketViewController.nib in Resources */,
-				434333E61CE0B0D10032EDF1 /* redPackert_luckCard@2x.png in Resources */,
 				434333F51CE0B0D10032EDF1 /* RedPacketResource.bundle in Resources */,
-				434333F21CE0B0D10032EDF1 /* redpacketDetailHeader@2x.png in Resources */,
-				434333E81CE0B0D10032EDF1 /* redpacket_header@2x.png in Resources */,
-				434333E91CE0B0D10032EDF1 /* redpacket_help@2x.png in Resources */,
-				434333E01CE0B0D10032EDF1 /* InComeRedpacketCell~iphone.nib in Resources */,
-				434333E41CE0B0D10032EDF1 /* payView_close@2x.png in Resources */,
-				434333E51CE0B0D10032EDF1 /* payView_close_high@2x.png in Resources */,
-				434333DC1CE0B0D10032EDF1 /* GroupRedpacketDetailHeaderView~iphone.nib in Resources */,
-				434333EE1CE0B0D10032EDF1 /* redpacket_redpacket@2x.png in Resources */,
 				7073FCD11B14718C006F2692 /* CDImageLabelTableCell.xib in Resources */,
-				434333E31CE0B0D10032EDF1 /* payView_arrow@2x.png in Resources */,
 				7073FCD31B14718C006F2692 /* CDLabelButtonTableCell.xib in Resources */,
-				434333E11CE0B0D10032EDF1 /* Info.plist in Resources */,
-				434333DE1CE0B0D10032EDF1 /* hudRefresh@2x.png in Resources */,
-				434333F01CE0B0D10032EDF1 /* redpacket_redpacketSend_luckBless@2x.png in Resources */,
-				434333F91CE0B0D10032EDF1 /* YZPasswordView~iphone.nib in Resources */,
-				434333EC1CE0B0D10032EDF1 /* redpacket_navigationbar_return@2x.png in Resources */,
-				434333FC1CE0B0D10032EDF1 /* YZRedPacketView~iphone.nib in Resources */,
-				434333E21CE0B0D10032EDF1 /* MyInComeHeaderView~iphone.nib in Resources */,
-				434333EA1CE0B0D10032EDF1 /* redpacket_help_high@2x.png in Resources */,
 				434333FE1CE0B0D10032EDF1 /* RedpacketCellResource.bundle in Resources */,
-				434333EB1CE0B0D10032EDF1 /* redpacket_luckyBest@2x.png in Resources */,
-				434333E71CE0B0D10032EDF1 /* redpacket_background@2x.png in Resources */,
-				434333F31CE0B0D10032EDF1 /* redpacketDetailHeader@3x.png in Resources */,
-				434333F81CE0B0D10032EDF1 /* Server.plist in Resources */,
-				434333FB1CE0B0D10032EDF1 /* YZPayView~iphone.nib in Resources */,
-				434333F61CE0B0D10032EDF1 /* SendRedPacketToMoreViewController.nib in Resources */,
-				434333FA1CE0B0D10032EDF1 /* YZPayTypeView~iphone.nib in Resources */,
 				7073FC281B147048006F2692 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

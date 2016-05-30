@@ -33,8 +33,17 @@
 
 
 /*---------------------------------------
- *  Colors
+ *  Const
  ---------------------------------------*/
+
+/**
+ *  红包名称
+ */
+static NSString *const rp_redpacketName = @"云红包";
+/**
+ *  红包归属
+ */
+static NSString *const rp_redpacketCompay = @"云账户";
 
 /**
  *  红包字体颜色
@@ -45,6 +54,7 @@ static uint const rp_textColorGray = 0x9e9e9e;
  *  背景颜色
  */
 static uint const rp_backGroundColorGray = 0xe3e3e3;
+
 
 
 UIKIT_STATIC_INLINE UIColor * rp_hexColor(uint color)

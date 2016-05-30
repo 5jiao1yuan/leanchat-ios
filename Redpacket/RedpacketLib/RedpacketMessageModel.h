@@ -12,16 +12,33 @@
 
 typedef NS_ENUM(NSInteger, RedpacketMessageType) {
     
+    /**
+     *  红包消息
+     */
     RedpacketMessageTypeRedpacket = 1001,
+    /**
+     *  红包被抢的消息
+     */
     RedpacketMessageTypeTedpacketTakenMessage,
-    
 };
 
 typedef NS_ENUM(NSInteger, RedpacketType) {
-    
+    /**
+     *  点对点红包
+     */
     RedpacketTypeSingle = 2001,
-    RedpacketTypeGroup
-    
+    /**
+     *  群组红包 (暂时留存)
+     */
+    RedpacketTypeGroup,
+    /**
+     *  拼手气红包
+     */
+    RedpacketTypeRand,
+    /**
+     *  普通红包
+     */
+    RedpacketTypeAvg
 };
 
 @interface RedpacketUserInfo : NSObject <NSCopying>
@@ -35,10 +52,24 @@ typedef NS_ENUM(NSInteger, RedpacketType) {
 
 @interface RedpacketViewModel : NSObject <NSCopying>
 
+/**
+ *  红包金额
+ */
+@property (nonatomic, copy) NSString *redpacketMoney;
+/**
+ *  群红包类型， 随机，或者平均
+ */
+@property (nonatomic, copy) NSString *groupRedpacketType;
+/**
+ *  红包个数
+ */
+@property (nonatomic, assign) NSInteger redpacketCount;
+
+
 @property (nonatomic, copy) NSString *redpacketGreeting;
 @property (nonatomic, copy) NSString *redpacketOrgName;
 
-//????:未来可定制化?
+//????:未来定制化留存
 @property (nonatomic, copy) NSString *redpacketIcon;
 @property (nonatomic, copy) NSString *redpacketOrgIcon;
 
@@ -52,33 +83,38 @@ typedef NS_ENUM(NSInteger, RedpacketType) {
 /**
  *  红包ID
  */
-@property (nonatomic, copy, readonly) NSString *redpacketId;
+@property (nonatomic, copy) NSString *redpacketId;
 
 /**
  *  红包消息类型，红包消息， 红包被领取的消息
  */
 @property (nonatomic, assign) RedpacketMessageType messageType;
 
-//  红包的类型
+/**
+ *  红包的类型
+ */
 @property (nonatomic, assign) RedpacketType redpacketType;
 
 /**
  *  当前用户是否是红包的发送者
  */
-@property (nonatomic, assign, readonly) BOOL isRedacketSender;
+@property (nonatomic, readonly) BOOL isRedacketSender;
 
 /**
  *  当前用户信息
  */
 @property (nonatomic, readonly) RedpacketUserInfo *currentUser;
+
 /**
  *  红包发送者信息
  */
 @property (nonatomic, strong) RedpacketUserInfo *redpacketSender;
+
 /**
  *  红包接受者信息
  */
 @property (nonatomic, strong) RedpacketUserInfo *redpacketReceiver;
+
 /**
  *  红包视图相关信息
  */
@@ -97,6 +133,7 @@ typedef NS_ENUM(NSInteger, RedpacketType) {
  *  @return @YES 跟红包相关  @NO 跟红包无关
  */
 + (BOOL)isRedpacketRelatedMessage:(NSDictionary *)redpacketDic;
+
 /**
  *  是否是红包信息
  *
@@ -105,19 +142,37 @@ typedef NS_ENUM(NSInteger, RedpacketType) {
  *  @return YES 是红包信息
  */
 + (BOOL)isRedpacket:(NSDictionary *)redpacketDic;
+
 /**
  *  是否是红包被抢的消息
  *
  *  @param redpacketDic
  *
- *  @return 
+ *  @return
  */
-+ (BOOL)isRedpacketMessage:(NSDictionary *)redpacketDic;
++ (BOOL)isRedpacketTakenMessage:(NSDictionary *)redpacketDic;
 
+/**
+ *  字典转换成红包消息Model
+ *
+ *  @param redpacketDic 红包字典，在IM消息中传播的字典
+ *
+ *  @return 红包消息Model
+ */
 + (RedpacketMessageModel *)redpacketMessageModelWithDic:(NSDictionary *)redpacketDic;
 
+/**
+ *   解析在IM消息中传播的字典
+ *
+ *  @param repacketDic 在IM消息中传播的字典
+ */
 - (void)configWithRedpacketDic:(NSDictionary *)repacketDic;
 
+/**
+ *  红包消息转换成字典
+ *
+ *  @return 在IM消息中传播的字典
+ */
 - (NSDictionary *)redpacketMessageModelToDic;
 
 

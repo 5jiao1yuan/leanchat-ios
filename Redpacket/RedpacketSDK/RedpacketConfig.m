@@ -16,7 +16,7 @@
 #import "RedpacketMessageModel.h"
 
 //	*此为演示地址* App需要修改为自己AppServer上的地址, 数据格式参考此地址给出的格式。
-static NSString * const requestUrl = @"http://121.42.52.69:3001/api/sign?duid=";
+static NSString *requestUrl = @"https://rpv2.yunzhanghu.com/api/sign?duid=";
 
 @interface RedpacketConfig ()
 
@@ -67,7 +67,7 @@ static NSString * const requestUrl = @"http://121.42.52.69:3001/api/sign?duid=";
 
 - (void)config
 {
-    if(![[YZHRedpacketBridge sharedBridge] isRedpacketTokenValidate]) {
+    if(![[YZHRedpacketBridge sharedBridge] isRedpacketTokenExist]) {
         NSString *userId = [self userId];
         
         if (userId) {
@@ -102,6 +102,10 @@ static NSString * const requestUrl = @"http://121.42.52.69:3001/api/sign?duid=";
 
 - (NSString *)userId
 {
-    return [AVUser currentUser].objectId;
+    if ([[AVUser currentUser] isAuthenticated]) {
+        return [AVUser currentUser].objectId;
+    }
+
+    return nil;
 }
 @end
