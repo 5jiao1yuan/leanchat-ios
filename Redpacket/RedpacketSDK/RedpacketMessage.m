@@ -19,9 +19,6 @@
 static NSString *const RedpacketDictKey = @"redpacket";
 static NSString *const RedpacketTypeDictKey = @"type";
 static NSString *const RedpacketTakenTypeValue = @"redpacket_taken";
-static NSString *const RedpacketUserDictKey = @"redpacket_user";
-static NSString *const RedpacketUserIdKey = @"id";
-static NSString *const RedpacketUserNameKey = @"username";
 
 #pragma mark - RedpacketMessage
 
@@ -50,30 +47,39 @@ static NSString *const RedpacketUserNameKey = @"username";
     return self;
 }
 
-- (NSString *)redpacketString
++ (NSString *)redpacketStringForRedpacket:(RedpacketMessageModel *)redpacket
 {
-    if (RedpacketMessageTypeRedpacket == self.redpacket.messageType) {
-        return [NSString stringWithFormat:@"[云红包]%@", self.redpacket.redpacket.redpacketGreeting];
+    if (RedpacketMessageTypeRedpacket == redpacket.messageType) {
+        return [NSString stringWithFormat:@"[云红包]%@", redpacket.redpacket.redpacketGreeting];
     }
-    else if (RedpacketMessageTypeTedpacketTakenMessage == self.redpacket.messageType) {
-        NSDictionary *user = self.redpacketPayload[RedpacketUserDictKey];
+    else if (RedpacketMessageTypeTedpacketTakenMessage == redpacket.messageType) {
         NSString *s = nil;
-        if([self.redpacket.currentUser.userId isEqualToString:self.redpacket.redpacketReceiver.userId]) {
+        if([redpacket.currentUser.userId isEqualToString:redpacket.redpacketReceiver.userId]) {
             // 显示我抢了别人的红包的提示
-            s =[NSString stringWithFormat:@"%@%@%@", // 你领取了 XXX 的红包
-                NSLocalizedString(@"你领取了", @"领取红包消息"),
-                user[RedpacketUserNameKey],
-                NSLocalizedString(@"的红包", @"领取红包消息结尾")
-                ];
+            if ([redpacket.redpacketSender.userId isEqualToString:redpacket.redpacketReceiver.userId]) {
+                s = @"你领取了自己的红包";
+            }
+            else {
+                s =[NSString stringWithFormat:@"%@%@%@", // 你领取了 XXX 的红包
+                    NSLocalizedString(@"你领取了", @"领取红包消息"),
+                    redpacket.redpacketSender.userNickname,
+                    NSLocalizedString(@"的红包", @"领取红包消息结尾")
+                    ];
+            }
         }
         else { // 收到了别人抢了我的红包的消息提示
             s = [NSString stringWithFormat:@"%@%@", // XXX 领取了你的红包
-                 user[RedpacketUserNameKey],
+                 redpacket.redpacketReceiver.userNickname,
                  NSLocalizedString(@"领取了你的红包", @"领取红包消息")];
         }
         return s;
     }
     return @"";
+}
+
+- (NSString *)redpacketString
+{
+    return [RedpacketMessage redpacketStringForRedpacket:self.redpacket];
 }
 
 @end
@@ -94,24 +100,6 @@ static NSString *const RedpacketUserNameKey = @"username";
         
         NSDictionary *rp = [redpacket redpacketMessageModelToDic];
         attributes[RedpacketDictKey] = rp;
-        
-        id<CDUserModelDelegate> selfUser = [[CDChatManager manager].userDelegate getUserById:[AVUser currentUser].objectId];
-        NSString *userName = [selfUser username];
-        NSString *userId = [selfUser userId];
-        NSString *userAvatar = [selfUser avatarUrl];
-        NSMutableDictionary *userDict = [NSMutableDictionary dictionaryWithCapacity:3];
-        if (userName) {
-            userDict[RedpacketUserNameKey] = userName;
-        }
-        if (userId) {
-            userDict[RedpacketUserIdKey] = userId;
-        }
-        if (userAvatar) {
-            userDict[@"avatar"] = userAvatar;
-        }
-        if (userDict.count) {
-            attributes[RedpacketUserDictKey] = userDict;
-        }
         
         [message setRedpacketPayload:attributes];
         [message setRedpacket:redpacket];
@@ -176,7 +164,6 @@ static NSString *const RedpacketUserNameKey = @"username";
             if(dict) {
                 NSMutableDictionary *d = [NSMutableDictionary dictionaryWithCapacity:2];
                 d[RedpacketDictKey] = dict;
-                d[RedpacketUserDictKey] = txtMessage.attributes[RedpacketUserDictKey];
                 self.redpacketPayload = d;
                 return self.redpacketPayload;
             }
@@ -191,7 +178,6 @@ static NSString *const RedpacketUserNameKey = @"username";
         if (redpacketDict) {
             NSMutableDictionary *d = [NSMutableDictionary dictionaryWithCapacity:2];
             d[RedpacketDictKey] = redpacketDict;
-            d[RedpacketUserDictKey] = dict[RedpacketUserDictKey];
             self.redpacketPayload = d;
             return self.redpacketPayload;
         }
@@ -206,33 +192,7 @@ static NSString *const RedpacketUserNameKey = @"username";
 
 - (NSString *)redpacketString
 {
-    if (RedpacketMessageTypeRedpacket == self.redpacket.messageType) {
-        return [NSString stringWithFormat:@"[云红包]%@", self.redpacket.redpacket.redpacketGreeting];
-    }
-    else if (RedpacketMessageTypeTedpacketTakenMessage == self.redpacket.messageType) {
-        NSDictionary *user = self.redpacketPayload[RedpacketUserDictKey];
-        NSString *s = nil;
-        if([self.redpacket.currentUser.userId isEqualToString:self.redpacket.redpacketReceiver.userId]) {
-            // 显示我抢了别人的红包的提示
-            if ([self.redpacket.redpacketSender.userId isEqualToString:user[RedpacketUserIdKey]]) {
-                s = @"你领取了自己的红包";
-            }
-            else {
-                s =[NSString stringWithFormat:@"%@%@%@", // 你领取了 XXX 的红包
-                    NSLocalizedString(@"你领取了", @"领取红包消息"),
-                    self.redpacket.redpacketSender.userNickname,
-                    NSLocalizedString(@"的红包", @"领取红包消息结尾")
-                    ];
-            }
-        }
-        else { // 收到了别人抢了我的红包的消息提示
-            s = [NSString stringWithFormat:@"%@%@", // XXX 领取了你的红包
-                 user[RedpacketUserNameKey],
-                 NSLocalizedString(@"领取了你的红包", @"领取红包消息")];
-        }
-        return s;
-    }
-    return @"";
+    return [RedpacketMessage redpacketStringForRedpacket:self.redpacket];
 }
 @end
 
