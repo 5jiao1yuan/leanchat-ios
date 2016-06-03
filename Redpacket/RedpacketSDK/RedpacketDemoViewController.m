@@ -105,6 +105,9 @@ static NSString *const RedpacketTakenMessageTipCellSenderIdentifier = @"Redpacke
 - (void)sendRedpacketMessage:(RedpacketMessageModel *)redpacket
 {
     RedpacketMessage *message = [RedpacketMessage messageWithRedpacket:redpacket];
+    id<CDUserModelDelegate> selfUser = [[CDChatManager manager].userDelegate getUserById:[AVUser currentUser].objectId];
+    message.avatorUrl = [selfUser avatarUrl];
+    message.sender = [selfUser username];
     assert(message);
     
     [self sendCustomRedpacketMessage:message];
