@@ -326,7 +326,11 @@ static CDChatManager *instance;
     
     if([message isRedpacket]) {
         RedpacketTakenAVIMTypedMessage *m = [RedpacketTakenAVIMTypedMessage messageWithAVIMMessage:message];
-        [self receiveMessage:m conversation:conversation];
+        NSString *currentUserId = m.redpacket.currentUser.userId;
+        if([currentUserId isEqualToString:m.redpacket.redpacketSender.userId]
+           || [currentUserId isEqualToString:m.redpacket.redpacketReceiver.userId]) {
+            [self receiveMessage:m conversation:conversation];
+        }
     }
 }
 
