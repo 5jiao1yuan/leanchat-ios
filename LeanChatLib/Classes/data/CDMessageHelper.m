@@ -83,7 +83,12 @@
     NSString *title = [self getMessageTitle:message];
     if (conversation.type == CDConversationTypeGroup) {
         id<CDUserModelDelegate> user = [[CDChatManager manager].userDelegate getUserById:message.clientId];
-        title = [NSString stringWithFormat:@"%@: %@", user.username, title];
+        if ([message isRedpacket]) {
+            title = [NSString stringWithFormat:@"%@", title];
+        }
+        else {
+            title = [NSString stringWithFormat:@"%@: %@", user.username, title];
+        }
     }
     if (conversation.muted && conversation.unreadCount > 0) {
         title = [NSString stringWithFormat:@"[%ld条] %@", conversation.unreadCount, title];
