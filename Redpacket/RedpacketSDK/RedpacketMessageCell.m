@@ -223,7 +223,7 @@ static const CGFloat kXHPeerNameLabelHeight = 20.0f;
                         displaysTimestamp:(BOOL)displayTimestamp
                          displaysPeerName:(BOOL)displayPeerName
 {
-    return [self getBubbleSize].height + 40;
+    return [self getBubbleSize].height + 55;
 }
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
