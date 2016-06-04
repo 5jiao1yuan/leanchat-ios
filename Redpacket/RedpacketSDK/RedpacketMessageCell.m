@@ -226,4 +226,13 @@ static const CGFloat kXHPeerNameLabelHeight = 20.0f;
     return [self getBubbleSize].height + 40;
 }
 
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    return NO;
+}
+
+- (void)longPressGestureRecognizerHandle:(UILongPressGestureRecognizer *)longPressGestureRecognizer {
+   
+}
+
+
 @end
