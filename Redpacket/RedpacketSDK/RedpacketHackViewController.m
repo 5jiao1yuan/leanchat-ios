@@ -113,6 +113,7 @@
         xhMessage.redpacketPayload = message.redpacketPayload;
         xhMessage.avator = nil;
         xhMessage.avatorUrl = [fromUser avatarUrl];
+        xhMessage.sender = [fromUser username];
         
         if ([[CDChatManager manager].clientId isEqualToString:message.clientId]) {
             xhMessage.bubbleMessageType = XHBubbleMessageTypeSending;
