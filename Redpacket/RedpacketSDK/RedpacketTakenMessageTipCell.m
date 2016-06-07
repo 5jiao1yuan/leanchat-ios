@@ -73,9 +73,17 @@
 - (void)configureMessageBubbleViewWithMessage:(id<XHMessageModel>)message {
     
     assert([message isKindOfClass:[RedpacketMessage class]]);
+    // 不能阻止无关的抢红包消息插入到聊天记录里，只能使用 tricky 的方法不让无关消息显示
     RedpacketMessage *m = (RedpacketMessage *)message;
-    self.tipMessageLabel.text = [m redpacketString];
-    
+    if ([m.redpacket.currentUser.userId isEqualToString:m.redpacket.redpacketSender.userId]
+        || [m.redpacket.currentUser.userId isEqualToString:m.redpacket.redpacketReceiver.userId]) {
+        self.bgView.hidden = NO;
+        self.tipMessageLabel.text = [m redpacketString];
+    }
+    else {
+        self.tipMessageLabel.text = nil;
+        self.bgView.hidden = YES;
+    }
     [self setNeedsLayout];
 }
 
@@ -110,7 +118,17 @@
                         displaysTimestamp:(BOOL)displayTimestamp
                          displaysPeerName:(BOOL)displayPeerName
 {
-    return 40; //
+    // 不能阻止无关的抢红包消息插入到聊天记录里，只能使用 tricky 的方法不让无关消息显示
+    assert([message isKindOfClass:[RedpacketMessage class]]);
+    RedpacketMessage *m = (RedpacketMessage *)message;
+    if ([m.redpacket.currentUser.userId isEqualToString:m.redpacket.redpacketSender.userId]
+        || [m.redpacket.currentUser.userId isEqualToString:m.redpacket.redpacketReceiver.userId]) {
+        return 40;
+    }
+    else {
+        return 0;
+    }
+    
 }
 
 - (void)configPeerName:(BOOL)displayPeerName atMessage:(id<XHMessageModel>)message {

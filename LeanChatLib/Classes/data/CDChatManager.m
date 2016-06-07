@@ -324,13 +324,14 @@ static CDChatManager *instance;
     
 #pragma mark - 红包被抢消息处理
     
-    if([message isRedpacket]) {
-        RedpacketTakenAVIMTypedMessage *m = [RedpacketTakenAVIMTypedMessage messageWithAVIMMessage:message];
-        NSString *currentUserId = m.redpacket.currentUser.userId;
-        if([currentUserId isEqualToString:m.redpacket.redpacketSender.userId]
-           || [currentUserId isEqualToString:m.redpacket.redpacketReceiver.userId]) {
-            [self receiveMessage:m conversation:conversation];
-        }
+    if([message isRedpacket]
+       && (RedpacketMessageTypeTedpacketTakenMessage == message.redpacket.messageType)) {
+           NSString *currentUserId = message.redpacket.currentUser.userId;
+           if([currentUserId isEqualToString:message.redpacket.redpacketSender.userId]
+              || [currentUserId isEqualToString:message.redpacket.redpacketReceiver.userId]) {
+               RedpacketTakenAVIMTypedMessage *m = [RedpacketTakenAVIMTypedMessage messageWithAVIMMessage:message];
+               [self receiveMessage:m conversation:conversation];
+           }
     }
 }
 
