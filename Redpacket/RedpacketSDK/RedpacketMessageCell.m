@@ -144,8 +144,10 @@ static const CGFloat kXHPeerNameLabelHeight = 20.0f;
     NSString *messageString = redpacketMessage.redpacket.redpacket.redpacketGreeting;
     self.greetingLabel.text = messageString;
     
-    NSString *orgString = redpacketMessage.redpacket.redpacket.redpacketOrgName;
-    self.orgLabel.text = orgString;
+//    NSString *orgString = redpacketMessage.redpacket.redpacket.redpacketOrgName;
+//    self.orgLabel.text = orgString;
+    // SDk 字段无法更改
+    self.orgLabel.text = @"LeanCloud红包";
     
     CGSize bubbleBackgroundViewSize = [[self class] getBubbleSize];
     CGRect messageContentViewRect = self.messageContentView.frame;
