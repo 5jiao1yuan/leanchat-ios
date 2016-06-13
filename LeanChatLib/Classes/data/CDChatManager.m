@@ -554,10 +554,27 @@ static CDChatManager *instance;
         NSMutableSet *userIds = [NSMutableSet set];
         NSUInteger totalUnreadCount = 0;
         for (AVIMConversation *conversation in conversations) {
-            NSArray *lastestMessages = [conversation queryMessagesFromCacheWithLimit:1];
-            if (lastestMessages.count > 0) {
-                conversation.lastMessage = lastestMessages[0];
+            AVIMTypedMessage *m = nil;
+            NSUInteger times = 1;
+            while(nil == m) {
+                NSArray *lastestMessages = [conversation queryMessagesFromCacheWithLimit:20 * times];
+                if (lastestMessages.count > 0) {
+                    for (NSUInteger i = lastestMessages.count; i > 0; i --) {
+                        const AVIMTypedMessage *m2 = lastestMessages[i - 1];
+                        if ([m2 isKindOfClass:[AVIMTypedMessage class]]) {
+                            m = m2;
+                            break;
+                        }
+                    }
+                }
+                times ++;
+                if (lastestMessages.count < 20 * times) {
+                    // 已经查找了所有的数据
+                    break;
+                }
             }
+            conversation.lastMessage = m;
+            
             if (conversation.type == CDConversationTypeSingle) {
                 [userIds addObject:conversation.otherId];
             } else {
