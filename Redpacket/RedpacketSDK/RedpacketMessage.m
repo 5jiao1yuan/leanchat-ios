@@ -50,9 +50,7 @@ static NSString *const RedpacketTakenTypeValue = @"redpacket_taken";
 + (NSString *)redpacketStringForRedpacket:(RedpacketMessageModel *)redpacket
 {
     if (RedpacketMessageTypeRedpacket == redpacket.messageType) {
-//        return [NSString stringWithFormat:@"[%@]%@", redpacket.redpacket.redpacketOrgName, redpacket.redpacket.redpacketGreeting];
-        // SDK 字段无法更改
-        return [NSString stringWithFormat:@"[LeanCloud红包]%@", redpacket.redpacket.redpacketGreeting];
+        return [NSString stringWithFormat:@"[%@]%@", redpacket.redpacket.redpacketOrgName, redpacket.redpacket.redpacketGreeting];
     }
     else if (RedpacketMessageTypeTedpacketTakenMessage == redpacket.messageType) {
         NSString *s = nil;
