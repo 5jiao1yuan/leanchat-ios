@@ -43,7 +43,7 @@ static NSString *const RedpacketTakenTypeValue = @"redpacket_taken";
     self.timestamp = [NSDate date];
     self.redpacket = redpacket;
     self.messageMediaType = XHBubbleMessageMediaTypeText;
-    self.text = NSLocalizedString(@"当前版本不支持红包消息", @"当前版本不支持红包消息");
+    self.text = [self redpacketString];
     return self;
 }
 
@@ -201,7 +201,7 @@ static NSString *const RedpacketTakenTypeValue = @"redpacket_taken";
 + (instancetype)messageWithRedpacket:(RedpacketMessageModel *)redpacket
 {
     AVIMTextMessage* message = [super messageWithRedpacket:redpacket];
-    message.text = NSLocalizedString(@"当前版本不支持红包消息", @"当前版本不支持红包消息");
+    message.text = [message redpacketString];
     message.attributes = [message.redpacketPayload copy];
     return message;
 }
