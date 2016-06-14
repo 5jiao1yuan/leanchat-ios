@@ -554,15 +554,26 @@ static CDChatManager *instance;
         NSMutableSet *userIds = [NSMutableSet set];
         NSUInteger totalUnreadCount = 0;
         for (AVIMConversation *conversation in conversations) {
+#pragma mark - 红包相关修改
+            // 抢红包的消息是通过 AVIMMessage 发的，因为 Demo 中默认是忽略处理 AVIMMessage 的。
+            // 但是 SDK 仍然会保存AVIMMessage 的消息，而在 Demo 的这一部分并未考虑到 AVIMMessage
+            // 的情况，所以当有 AVIMMessage 的时候，它仍然会保存到 lastMessage，并“正常”显示出来。
+            // 所以这里把不合适的 AVIMMessage 过滤掉。
             AVIMTypedMessage *m = nil;
             NSUInteger times = 1;
             while(nil == m) {
                 NSArray *lastestMessages = [conversation queryMessagesFromCacheWithLimit:20 * times];
                 if (lastestMessages.count > 0) {
                     for (NSUInteger i = lastestMessages.count; i > 0; i --) {
-                        const AVIMTypedMessage *m2 = lastestMessages[i - 1];
+                        const AVIMMessage *m2 = lastestMessages[i - 1];
                         if ([m2 isKindOfClass:[AVIMTypedMessage class]]) {
-                            m = m2;
+                            m = (AVIMTypedMessage *)m2;
+                            break;
+                        }
+                        else if([m2.redpacket.currentUser.userId isEqualToString:m2.redpacket.redpacketSender.userId]
+                              || [m2.redpacket.currentUser.userId isEqualToString:m2.redpacket.redpacketReceiver.userId]) {
+                            // 这里只是将错就错，原来的代码也是这样未考虑 AVIMMessage 的情况
+                            m = (AVIMTypedMessage *)m2;
                             break;
                         }
                     }
@@ -573,6 +584,7 @@ static CDChatManager *instance;
                     break;
                 }
             }
+#pragma mark -
             conversation.lastMessage = m;
             
             if (conversation.type == CDConversationTypeSingle) {
