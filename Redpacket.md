@@ -12,12 +12,13 @@ LeanCloud红包 SDK 接入文档
 
   `git clone https://github.com/YunzhanghuOpen/leanchat-ios`
 
-
   如果已有代码，需要执行
 
   `git pull --rebase`
 
   来进行更新。
+
+  1.1 如果是想直接使用已做好的例子，请使用 `git checkout origin/Redpacket -b redpacket` 来直接使用已经修改好的代码, 并且以下的步骤可以省略
 
 2. 下载最新的红包 SDK 库文件 ( master 或者是 release )
 
@@ -27,7 +28,15 @@ LeanCloud红包 SDK 接入文档
 
   解压后将 RedpacketLib 复制至 leanchat-ios 目录下。
 
-3. 开启 LeanChat/LeanChat.xcworkspace/ 工程文件
+3. 通过 Terminal 进入 LeanChat 目录，执行(需要安装 CocoaPods)
+
+    `pod install`
+    
+    开启 LeanChat/LeanChat.xcworkspace/ 工程文件
+
+    3.1  开启的工程里，需要在 Pods.xcodeproj 的 LeanChatLib Target 的 Build Settings 下的 User Header Search Path 中添加
+
+    `$(PROJECT_DIR)/../Redpacket/RedpacketLib` 和 `$(PROJECT_DIR)/../Redpacket/RedpacketSDK`
 
 4. 设置红包信息
 
