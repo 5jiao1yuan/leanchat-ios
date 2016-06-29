@@ -93,7 +93,7 @@ static NSString *const RedpacketTakenMessageTipCellSenderIdentifier = @"Redpacke
     } andRedpacketBlock:^(RedpacketMessageModel *redpacket) {
         // 用户发红包的通知
         // SDK 内的消息错误，又无法改变
-        redpacket.redpacket.redpacketOrgName = rp_redpacketName;
+//        redpacket.redpacket.redpacketOrgName = self.rp_redpacketName;
         [SELF sendRedpacketMessage:redpacket];
     }];
     
@@ -224,7 +224,7 @@ static NSString *const RedpacketTakenMessageTipCellSenderIdentifier = @"Redpacke
             [self.redpacketControl presentRedPacketViewController];
         }
         else if(c > 2) {
-            [self.redpacketControl presentRedPacketMoreViewControllerWithCount:c];
+            [self.redpacketControl presentRedPacketMoreViewControllerWithGroupMemberArray:@[]];
         }
     }
     else {
