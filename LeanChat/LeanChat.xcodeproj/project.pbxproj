@@ -84,6 +84,7 @@
 		E704E4401D23FFCA00263965 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E704E4341D23FFCA00263965 /* AlipaySDK.bundle */; };
 		E704E4411D23FFCA00263965 /* libRedpacketLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E704E4361D23FFCA00263965 /* libRedpacketLib.a */; };
 		E704E4421D23FFCA00263965 /* RedPacketResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E704E43C1D23FFCA00263965 /* RedPacketResource.bundle */; };
+		E704E4471D24C7A100263965 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E704E4461D24C7A100263965 /* CoreMotion.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -241,6 +242,7 @@
 		E704E43C1D23FFCA00263965 /* RedPacketResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RedPacketResource.bundle; sourceTree = "<group>"; };
 		E704E43D1D23FFCA00263965 /* YZHRedpacketBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZHRedpacketBridge.h; sourceTree = "<group>"; };
 		E704E43E1D23FFCA00263965 /* YZHRedpacketBridgeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZHRedpacketBridgeProtocol.h; sourceTree = "<group>"; };
+		E704E4461D24C7A100263965 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		EF79D434DB9DF2EFE3DD51B2 /* libPods-LeanChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LeanChat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -249,6 +251,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E704E4471D24C7A100263965 /* CoreMotion.framework in Frameworks */,
 				9A2AFA7F1C2AB23400F451BE /* UIKit.framework in Frameworks */,
 				9A2AFA6D1C2AADB200F451BE /* SystemConfiguration.framework in Frameworks */,
 				9A2AFA7D1C2AB22500F451BE /* StoreKit.framework in Frameworks */,
@@ -563,6 +566,7 @@
 		B215B044676D1B59F414465D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E704E4461D24C7A100263965 /* CoreMotion.framework */,
 				9A2AFA7E1C2AB23400F451BE /* UIKit.framework */,
 				9A2AFA7C1C2AB22500F451BE /* StoreKit.framework */,
 				9A2AFA7A1C2AB21E00F451BE /* Security.framework */,
