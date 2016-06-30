@@ -11,7 +11,7 @@
 #import "CDCommon.h"
 #import "CDBaseVC.h"
 
-typedef void (^CompletionBlock)(BOOL successed, NSError *error);
+typedef void (^Lean_CompletionBlock)(BOOL successed, NSError *error);
 
 @interface CDIMService : NSObject<CDUserDelegate>
 
@@ -20,11 +20,11 @@ typedef void (^CompletionBlock)(BOOL successed, NSError *error);
 /*!
  @brief  create conversation room, if success push to it
  */
-- (void)createChatRoomByUserId:(NSString *)userId fromViewController:(CDBaseVC *)viewController completion:(CompletionBlock)completion;
+- (void)createChatRoomByUserId:(NSString *)userId fromViewController:(CDBaseVC *)viewController completion:(Lean_CompletionBlock)completion;
 
 /*!
  @brief  firstly, create conversation room, secondly, if success, push to it.
  */
-- (void)pushToChatRoomByConversation:(AVIMConversation *)conversation fromNavigation:(UINavigationController *)navigation completion:(CompletionBlock)completion;
+- (void)pushToChatRoomByConversation:(AVIMConversation *)conversation fromNavigation:(UINavigationController *)navigation completion:(Lean_CompletionBlock)completion;
 
 @end

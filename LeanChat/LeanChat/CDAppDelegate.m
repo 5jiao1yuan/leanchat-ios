@@ -25,6 +25,8 @@
 
 #pragma mark - 红包相关头文件
 #import "RedpacketConfig.h"
+#import "AlipaySDK.h"
+#import "RedpacketOpenConst.h"
 #pragma mark -
 
 @interface CDAppDelegate()
@@ -117,6 +119,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     //[[LZPushManager manager] cleanBadge];
     [application cancelAllLocalNotifications];
+    [[NSNotificationCenter defaultCenter] postNotificationName:RedpacketAlipayNotifaction object:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -222,17 +225,7 @@
     [OpenShare handleOpenURL:url];
     return YES;
 }
-#ifdef REDPACKET_AVALABLE
 
-#pragma mark - Alipay
-
-/**
- *  iOS9 statusBar上的快捷返回监听
- */
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:RedpacketAlipayNotifaction object:nil];
-}
 
 // NOTE: 9.0之前使用的API接口
 - (BOOL)application:(UIApplication *)application
@@ -262,7 +255,5 @@
     }
     return YES;
 }
-
-#endif
 
 @end

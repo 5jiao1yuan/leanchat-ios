@@ -53,7 +53,7 @@
     return user;
 }
 
-- (void)pushToChatRoomByConversation:(AVIMConversation *)conversation fromNavigation:(UINavigationController *)navigation completion:(CompletionBlock)completion {
+- (void)pushToChatRoomByConversation:(AVIMConversation *)conversation fromNavigation:(UINavigationController *)navigation completion:(Lean_CompletionBlock)completion {
     //如果从单聊聊天界面跳转到单聊页面，根据当前的业务可以认为这两个单聊是同一个页面，则直接 pop 回聊天界面
     for (UIViewController *viewController in navigation.viewControllers) {
         if ([viewController isKindOfClass:[CDChatVC class]] ) {
@@ -78,7 +78,7 @@
     completion ? completion(YES, nil) : nil;
 }
 
-- (void)createChatRoomByUserId:(NSString *)userId fromViewController:(CDBaseVC *)viewController completion:(CompletionBlock)completion {
+- (void)createChatRoomByUserId:(NSString *)userId fromViewController:(CDBaseVC *)viewController completion:(Lean_CompletionBlock)completion {
     [[CDChatManager manager] fetchConversationWithOtherId:userId callback: ^(AVIMConversation *conversation, NSError *error) {
         if ([viewController filterError:error]) {
             [self pushToChatRoomByConversation:conversation fromNavigation:viewController.navigationController completion:completion];

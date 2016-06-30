@@ -243,6 +243,8 @@
 		E704E43D1D23FFCA00263965 /* YZHRedpacketBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZHRedpacketBridge.h; sourceTree = "<group>"; };
 		E704E43E1D23FFCA00263965 /* YZHRedpacketBridgeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZHRedpacketBridgeProtocol.h; sourceTree = "<group>"; };
 		E704E4461D24C7A100263965 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		E704E44A1D25190E00263965 /* AlipaySDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlipaySDK.h; sourceTree = "<group>"; };
+		E704E44B1D25190E00263965 /* APayAuthInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APayAuthInfo.h; sourceTree = "<group>"; };
 		EF79D434DB9DF2EFE3DD51B2 /* libPods-LeanChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LeanChat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -611,6 +613,8 @@
 		E704E4321D23FFCA00263965 /* AlipayLib */ = {
 			isa = PBXGroup;
 			children = (
+				E704E44A1D25190E00263965 /* AlipaySDK.h */,
+				E704E44B1D25190E00263965 /* APayAuthInfo.h */,
 				E704E4331D23FFCA00263965 /* AlipaySDK.a */,
 			);
 			path = AlipayLib;
@@ -667,6 +671,7 @@
 				TargetAttributes = {
 					7073FC161B147048006F2692 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = PUEB48NTQQ;
 					};
 				};
 			};
@@ -942,6 +947,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "LeanChat/LeanChat-Prefix.pch";
@@ -1033,6 +1039,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "LeanChat/LeanChat-Prefix.pch";
 				INFOPLIST_FILE = LeanChat/Info.plist;
@@ -1110,7 +1117,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.redpacket.LeanCloudDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "79201b87-4bb0-4b8a-93e7-f5951b287708";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Redpacket/RedpacketLib $(PROJECT_DIR)/../Redpacket/RedpacketSDK";
 			};
 			name = Release;
