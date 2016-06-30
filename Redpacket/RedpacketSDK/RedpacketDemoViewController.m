@@ -16,6 +16,7 @@
 #import "RedpacketMessage.h"
 #import "RedpacketMessageCell.h"
 #import "RedpacketTakenMessageTipCell.h"
+#import "CDCacheManager.h"
 #pragma mark -
 
 #pragma mark - 红包相关的宏定义
@@ -27,9 +28,10 @@ static NSString *const RedpacketMessageCellSenderIdentifier = @"RedpacketMessage
 static NSString *const RedpacketTakenMessageTipCellReceiverIdentifier = @"RedpacketTakenMessageTipCellReceiverIdentifier";
 static NSString *const RedpacketTakenMessageTipCellSenderIdentifier = @"RedpacketTakenMessageTipSenderCellIdentifier";
 
-@interface RedpacketDemoViewController () <RedpacketCellDelegate>
+@interface RedpacketDemoViewController () <RedpacketCellDelegate,RedpacketViewControlDelegate>
 
 @property (nonatomic, strong, readwrite) RedpacketViewControl *redpacketControl;
+@property (nonatomic, strong) NSMutableArray *memberArray;
 
 @end
 
@@ -40,7 +42,7 @@ static NSString *const RedpacketTakenMessageTipCellSenderIdentifier = @"Redpacke
     [super viewDidLoad];
     
     NSMutableArray *array = [self.shareMenuItems mutableCopy];
-    
+    self.memberArray = [NSMutableArray array];
     // 设置红包插件界面
     UIImage *icon = [UIImage imageNamed:REDPACKET_BUNDLE(@"redpacket_redpacket")];
     assert(icon);
@@ -84,7 +86,7 @@ static NSString *const RedpacketTakenMessageTipCellSenderIdentifier = @"Redpacke
     }
 
     self.redpacketControl.converstationInfo = user;
-    
+    self.redpacketControl.delegate = self;
     __weak typeof(self) SELF = self;
     // 设置红包 SDK 功能回调
     [self.redpacketControl setRedpacketGrabBlock:^(RedpacketMessageModel *redpacket) {
@@ -224,11 +226,29 @@ static NSString *const RedpacketTakenMessageTipCellSenderIdentifier = @"Redpacke
             [self.redpacketControl presentRedPacketViewController];
         }
         else if(c > 2) {
-            [self.redpacketControl presentRedPacketMoreViewControllerWithGroupMemberArray:@[]];
+            [self.memberArray removeAllObjects];
+            [[CDCacheManager manager] cacheUsersWithIds:[NSSet setWithArray:self.conversation.members] callback: ^(BOOL succeeded, NSError *error) {
+                
+                if (!error) {
+                    for (NSString *userId in self.conversation.members) {
+                        [self.memberArray addObject:[self memberFromUser:[[CDCacheManager manager] lookupUser:userId]]];
+                    }
+                }
+            }];
+            [self.redpacketControl presentRedPacketMoreViewControllerWithGroupMemberArray:self.memberArray];
         }
     }
     else {
         [super didSelecteShareMenuItem:shareMenuItem atIndex:index];
     }
+}
+- (NSArray *)groupMemberList{
+    return self.memberArray;
+}
+- (RedpacketUserInfo *)memberFromUser:(AVUser *)user {
+    RedpacketUserInfo *member = [[RedpacketUserInfo alloc] init];
+    member.userId = user.objectId;
+    member.userNickname = user.username;
+    return member;
 }
 @end
