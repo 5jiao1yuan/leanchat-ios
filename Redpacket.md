@@ -25,12 +25,51 @@ LeanCloud红包 SDK 接入文档
 
 解压后将 RedpacketLib 复制至 leanchat-ios/Redpacket 目录下。
 
-##3. LeanChat/LeanChat.xcworkspace
+##3. 下载支付宝相关SDK并导入.如缺少必须静态库.请参考支付宝添加.
+[https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.CeDJVo&treeId=54&articleId=104509&docType=1](https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.CeDJVo&treeId=54&articleId=104509&docType=1)
+
+在Appdelegate中写入以下方法
+
+    ```objc
+    // NOTE: 9.0之前使用的API接口
+    - (BOOL)application:(UIApplication *)application
+                openURL:(NSURL *)url
+      sourceApplication:(NSString *)sourceApplication
+             annotation:(id)annotation {
+        
+        if ([url.host isEqualToString:@"safepay"]) {
+            //跳转支付宝钱包进行支付，处理支付结果
+            [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:RedpacketAlipayNotifaction object:resultDic];
+            }];
+        }
+        return YES;
+    }
+    
+    // NOTE: 9.0以后使用新API接口
+    - (BOOL)application:(UIApplication *)app
+                openURL:(NSURL *)url
+                options:(NSDictionary<NSString*, id> *)options
+    {
+        if ([url.host isEqualToString:@"safepay"]) {
+            //跳转支付宝钱包进行支付，处理支付结果
+            [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:RedpacketAlipayNotifaction object:resultDic];
+            }];
+        }
+        return YES;
+    }
+    - (void)applicationDidBecomeActive:(UIApplication *)application {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:RedpacketAlipayNotifaction object:nil];
+    }
+
+##4. LeanChat/LeanChat.xcworkspace
 
 在工程中Redpacket文件夹中导入RedpacketLib文件夹。如遇到`file not fond`
 请在 `Pods.xcodeproj` 的 `LeanChatLib Target` 的 `Build Settings` 下的 `User Header Search Path` 中查看路径设置是否正确
 
-##4. 设置红包信息
+##5. 设置红包信息
 
 在用户获取到IMtoken时
 
@@ -48,7 +87,7 @@ LeanCloud红包 SDK 接入文档
 来清理`红包 SDK` 的信息注册
 如对注册信息有其他要求,请自行参考`RedpacketConfig`实现和`YZHRedpacketBridge`所提供API
 
-##5. 在聊天对话中添加红包支持API
+##6. 在聊天对话中添加红包支持API
 
 1) 添加类支持
 
