@@ -23,6 +23,12 @@
 #import <OpenShare/OpenShareHeader.h>
 #import "MBProgressHUD.h"
 
+#pragma mark - 红包相关头文件
+#import "RedpacketConfig.h"
+#import "AlipaySDK.h"
+#import "RedpacketOpenConst.h"
+#pragma mark -
+
 @interface CDAppDelegate()
 
 @property (nonatomic, strong) CDLoginVC *loginVC;
@@ -113,6 +119,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     //[[LZPushManager manager] cleanBadge];
     [application cancelAllLocalNotifications];
+    [[NSNotificationCenter defaultCenter] postNotificationName:RedpacketAlipayNotifaction object:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -154,6 +161,11 @@
 }
 
 - (void)toMain{
+#pragma mark - 红包相关功能
+    // 因为 LeanChat 里登录的时候也会执行这里的 toMain，所以在这里执行配置红包 Token 的功能
+    // 进入 toMain 时 LeanChat 已经确保存在 userId
+    [RedpacketConfig config];
+#pragma mark -
     [iRate sharedInstance].applicationBundleID = @"com.avoscloud.leanchat";
     [iRate sharedInstance].onlyPromptIfLatestVersion = NO;
     [iRate sharedInstance].previewMode = NO;
@@ -211,6 +223,36 @@
 {
     [AVOSCloudSNS handleOpenURL:url];
     [OpenShare handleOpenURL:url];
+    return YES;
+}
+
+
+// NOTE: 9.0之前使用的API接口
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    
+    if ([url.host isEqualToString:@"safepay"]) {
+        //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:RedpacketAlipayNotifaction object:resultDic];
+        }];
+    }
+    return YES;
+}
+
+// NOTE: 9.0以后使用新API接口
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<NSString*, id> *)options
+{
+    if ([url.host isEqualToString:@"safepay"]) {
+        //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:RedpacketAlipayNotifaction object:resultDic];
+        }];
+    }
     return YES;
 }
 

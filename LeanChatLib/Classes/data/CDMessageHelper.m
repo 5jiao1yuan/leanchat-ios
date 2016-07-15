@@ -11,6 +11,10 @@
 #import "CDEmotionUtils.h"
 #import "AVIMEmotionMessage.h"
 
+#pragma mark - 红包相关代码
+#import "RedpacketMessage.h"
+#import "RedpacketMessageModel.h"
+
 @interface CDMessageHelper ()
 
 @property (nonatomic, strong) NSCache *attributedStringCache;
@@ -32,40 +36,59 @@
 
 - (NSString *)getMessageTitle:(AVIMTypedMessage *)msg {
     NSString *title;
-    AVIMLocationMessage *locationMsg;
-    switch (msg.mediaType) {
-        case kAVIMMessageMediaTypeText:
-            title = [CDEmotionUtils emojiStringFromString:msg.text];
-            break;
-            
-        case kAVIMMessageMediaTypeAudio:
-            title = @"声音";
-            break;
-            
-        case kAVIMMessageMediaTypeImage:
-            title = @"图片";
-            break;
-            
-        case kAVIMMessageMediaTypeLocation:
-            locationMsg = (AVIMLocationMessage *)msg;
-            title = locationMsg.text;
-            break;
-        case kAVIMMessageMediaTypeEmotion:
-            title = @"表情";
-            break;
-        case kAVIMMessageMediaTypeVideo:
-            title = @"视频";
-        default:
-            break;
+#pragma mark - 针对红包的修改
+    if ([msg isKindOfClass:[AVIMTypedMessage class]]) {
+        if ([msg isRedpacket]) {
+            return [msg redpacketString];            
+        }
+        AVIMLocationMessage *locationMsg;
+        switch (msg.mediaType) {
+            case kAVIMMessageMediaTypeText:
+                title = [CDEmotionUtils emojiStringFromString:msg.text];
+                break;
+                
+            case kAVIMMessageMediaTypeAudio:
+                title = @"声音";
+                break;
+                
+            case kAVIMMessageMediaTypeImage:
+                title = @"图片";
+                break;
+                
+            case kAVIMMessageMediaTypeLocation:
+                locationMsg = (AVIMLocationMessage *)msg;
+                title = locationMsg.text;
+                break;
+            case kAVIMMessageMediaTypeEmotion:
+                title = @"表情";
+                break;
+            case kAVIMMessageMediaTypeVideo:
+                title = @"视频";
+            default:
+                break;
+        }
+        return title;
     }
-    return title;
+    if([msg isKindOfClass:[AVIMMessage class]]) {
+        AVIMMessage *m = (AVIMMessage *)msg;
+        if ([m isRedpacket]) {
+            return [msg redpacketString];
+        }
+    }
+    
+    return @"";
 }
 
 - (NSAttributedString *)attributedStringWithMessage:(AVIMTypedMessage *)message conversation:(AVIMConversation *)conversation {
     NSString *title = [self getMessageTitle:message];
     if (conversation.type == CDConversationTypeGroup) {
         id<CDUserModelDelegate> user = [[CDChatManager manager].userDelegate getUserById:message.clientId];
-        title = [NSString stringWithFormat:@"%@: %@", user.username, title];
+        if ([message isRedpacket]) {
+            title = [NSString stringWithFormat:@"%@", title];
+        }
+        else {
+            title = [NSString stringWithFormat:@"%@: %@", user.username, title];
+        }
     }
     if (conversation.muted && conversation.unreadCount > 0) {
         title = [NSString stringWithFormat:@"[%ld条] %@", conversation.unreadCount, title];

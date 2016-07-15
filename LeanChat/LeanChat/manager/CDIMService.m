@@ -16,6 +16,10 @@
 #import <LeanChatLib/CDEmotionUtils.h>
 #import "CDAppDelegate.h"
 
+#pragma mark - 红包相关头文件
+#import "RedpacketDemoViewController.h"
+#pragma mark -
+
 @interface CDIMService ()
 
 @end
@@ -49,7 +53,7 @@
     return user;
 }
 
-- (void)pushToChatRoomByConversation:(AVIMConversation *)conversation fromNavigation:(UINavigationController *)navigation completion:(CompletionBlock)completion {
+- (void)pushToChatRoomByConversation:(AVIMConversation *)conversation fromNavigation:(UINavigationController *)navigation completion:(Lean_CompletionBlock)completion {
     //如果从单聊聊天界面跳转到单聊页面，根据当前的业务可以认为这两个单聊是同一个页面，则直接 pop 回聊天界面
     for (UIViewController *viewController in navigation.viewControllers) {
         if ([viewController isKindOfClass:[CDChatVC class]] ) {
@@ -64,7 +68,9 @@
     CDAppDelegate *delegate = ((CDAppDelegate *)[[UIApplication sharedApplication] delegate]);
     UIWindow *window = delegate.window;
     UITabBarController *tabbarController = (UITabBarController *)window.rootViewController;
-    CDChatVC *chatVC = [[CDChatVC alloc] initWithConversation:conversation];
+#pragma mark - 创建支持红包功能的聊天界面
+    CDChatVC *chatVC = [[RedpacketDemoViewController alloc] initWithConversation:conversation];
+#pragma mark -
     chatVC.hidesBottomBarWhenPushed = YES;
     tabbarController.selectedViewController = tabbarController.viewControllers[0];
     [navigation popToRootViewControllerAnimated:NO];
@@ -72,7 +78,7 @@
     completion ? completion(YES, nil) : nil;
 }
 
-- (void)createChatRoomByUserId:(NSString *)userId fromViewController:(CDBaseVC *)viewController completion:(CompletionBlock)completion {
+- (void)createChatRoomByUserId:(NSString *)userId fromViewController:(CDBaseVC *)viewController completion:(Lean_CompletionBlock)completion {
     [[CDChatManager manager] fetchConversationWithOtherId:userId callback: ^(AVIMConversation *conversation, NSError *error) {
         if ([viewController filterError:error]) {
             [self pushToChatRoomByConversation:conversation fromNavigation:viewController.navigationController completion:completion];

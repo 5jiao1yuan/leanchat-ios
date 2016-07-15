@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		1FAD25EBE59E07248BD0F7D5 /* libPods-LeanChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF79D434DB9DF2EFE3DD51B2 /* libPods-LeanChat.a */; };
+		434333FE1CE0B0D10032EDF1 /* RedpacketCellResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 434333CE1CE0B0D10032EDF1 /* RedpacketCellResource.bundle */; };
+		434333FF1CE0B0D10032EDF1 /* RedpacketConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 434333D01CE0B0D10032EDF1 /* RedpacketConfig.m */; };
+		434334001CE0B0D10032EDF1 /* RedpacketDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 434333D21CE0B0D10032EDF1 /* RedpacketDemoViewController.m */; };
+		434334011CE0B0D10032EDF1 /* RedpacketHackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 434333D41CE0B0D10032EDF1 /* RedpacketHackViewController.m */; };
+		434334021CE0B0D10032EDF1 /* RedpacketMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 434333D61CE0B0D10032EDF1 /* RedpacketMessage.m */; };
+		434334031CE0B0D10032EDF1 /* RedpacketMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 434333D81CE0B0D10032EDF1 /* RedpacketMessageCell.m */; };
+		434334041CE0B0D10032EDF1 /* RedpacketTakenMessageTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 434333DA1CE0B0D10032EDF1 /* RedpacketTakenMessageTipCell.m */; };
 		700E6A151B3D2B4E00675021 /* LZPushManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 700E6A141B3D2B4E00675021 /* LZPushManager.m */; };
 		703B392E1B74890100E649DC /* CDSNSView.m in Sources */ = {isa = PBXBuildFile; fileRef = 703B392D1B74890100E649DC /* CDSNSView.m */; };
 		7073FC1D1B147048006F2692 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7073FC1C1B147048006F2692 /* main.m */; };
@@ -73,6 +80,11 @@
 		9A2AFA7D1C2AB22500F451BE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2AFA7C1C2AB22500F451BE /* StoreKit.framework */; };
 		9A2AFA7F1C2AB23400F451BE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2AFA7E1C2AB23400F451BE /* UIKit.framework */; };
 		9AD85BB91C21666B006A35C1 /* CYLTabBarControllerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD85BB81C21666B006A35C1 /* CYLTabBarControllerConfig.m */; };
+		E704E43F1D23FFCA00263965 /* AlipaySDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E704E4331D23FFCA00263965 /* AlipaySDK.a */; };
+		E704E4401D23FFCA00263965 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E704E4341D23FFCA00263965 /* AlipaySDK.bundle */; };
+		E704E4411D23FFCA00263965 /* libRedpacketLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E704E4361D23FFCA00263965 /* libRedpacketLib.a */; };
+		E704E4421D23FFCA00263965 /* RedPacketResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E704E43C1D23FFCA00263965 /* RedPacketResource.bundle */; };
+		E704E4471D24C7A100263965 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E704E4461D24C7A100263965 /* CoreMotion.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +98,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		434333CE1CE0B0D10032EDF1 /* RedpacketCellResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RedpacketCellResource.bundle; sourceTree = "<group>"; };
+		434333CF1CE0B0D10032EDF1 /* RedpacketConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketConfig.h; sourceTree = "<group>"; };
+		434333D01CE0B0D10032EDF1 /* RedpacketConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedpacketConfig.m; sourceTree = "<group>"; };
+		434333D11CE0B0D10032EDF1 /* RedpacketDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketDemoViewController.h; sourceTree = "<group>"; };
+		434333D21CE0B0D10032EDF1 /* RedpacketDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedpacketDemoViewController.m; sourceTree = "<group>"; };
+		434333D31CE0B0D10032EDF1 /* RedpacketHackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketHackViewController.h; sourceTree = "<group>"; };
+		434333D41CE0B0D10032EDF1 /* RedpacketHackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedpacketHackViewController.m; sourceTree = "<group>"; };
+		434333D51CE0B0D10032EDF1 /* RedpacketMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketMessage.h; sourceTree = "<group>"; };
+		434333D61CE0B0D10032EDF1 /* RedpacketMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedpacketMessage.m; sourceTree = "<group>"; };
+		434333D71CE0B0D10032EDF1 /* RedpacketMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketMessageCell.h; sourceTree = "<group>"; };
+		434333D81CE0B0D10032EDF1 /* RedpacketMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedpacketMessageCell.m; sourceTree = "<group>"; };
+		434333D91CE0B0D10032EDF1 /* RedpacketTakenMessageTipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketTakenMessageTipCell.h; sourceTree = "<group>"; };
+		434333DA1CE0B0D10032EDF1 /* RedpacketTakenMessageTipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedpacketTakenMessageTipCell.m; sourceTree = "<group>"; };
 		4A71AD2EA525F79828723CA0 /* Pods-LeanChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeanChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeanChat/Pods-LeanChat.release.xcconfig"; sourceTree = "<group>"; };
 		700E6A131B3D2B4E00675021 /* LZPushManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZPushManager.h; sourceTree = "<group>"; };
 		700E6A141B3D2B4E00675021 /* LZPushManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZPushManager.m; sourceTree = "<group>"; };
@@ -207,6 +232,19 @@
 		9A2AFA7E1C2AB23400F451BE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9AD85BB71C21666B006A35C1 /* CYLTabBarControllerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLTabBarControllerConfig.h; sourceTree = "<group>"; };
 		9AD85BB81C21666B006A35C1 /* CYLTabBarControllerConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYLTabBarControllerConfig.m; sourceTree = "<group>"; };
+		E704E4331D23FFCA00263965 /* AlipaySDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AlipaySDK.a; sourceTree = "<group>"; };
+		E704E4341D23FFCA00263965 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		E704E4361D23FFCA00263965 /* libRedpacketLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libRedpacketLib.a; sourceTree = "<group>"; };
+		E704E4371D23FFCA00263965 /* RedpacketErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketErrorCode.h; sourceTree = "<group>"; };
+		E704E4381D23FFCA00263965 /* RedpacketMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketMessageModel.h; sourceTree = "<group>"; };
+		E704E4391D23FFCA00263965 /* RedpacketOpenConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketOpenConst.h; sourceTree = "<group>"; };
+		E704E43A1D23FFCA00263965 /* RedpacketViewControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketViewControl.h; sourceTree = "<group>"; };
+		E704E43C1D23FFCA00263965 /* RedPacketResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RedPacketResource.bundle; sourceTree = "<group>"; };
+		E704E43D1D23FFCA00263965 /* YZHRedpacketBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZHRedpacketBridge.h; sourceTree = "<group>"; };
+		E704E43E1D23FFCA00263965 /* YZHRedpacketBridgeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZHRedpacketBridgeProtocol.h; sourceTree = "<group>"; };
+		E704E4461D24C7A100263965 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		E704E44A1D25190E00263965 /* AlipaySDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlipaySDK.h; sourceTree = "<group>"; };
+		E704E44B1D25190E00263965 /* APayAuthInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APayAuthInfo.h; sourceTree = "<group>"; };
 		EF79D434DB9DF2EFE3DD51B2 /* libPods-LeanChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LeanChat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -215,6 +253,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E704E4471D24C7A100263965 /* CoreMotion.framework in Frameworks */,
 				9A2AFA7F1C2AB23400F451BE /* UIKit.framework in Frameworks */,
 				9A2AFA6D1C2AADB200F451BE /* SystemConfiguration.framework in Frameworks */,
 				9A2AFA7D1C2AB22500F451BE /* StoreKit.framework in Frameworks */,
@@ -223,7 +262,9 @@
 				9A2AFA6F1C2AADBB00F451BE /* MobileCoreServices.framework in Frameworks */,
 				9A2AFA771C2AB1EA00F451BE /* MediaPlayer.framework in Frameworks */,
 				9A2AFA751C2AB1CE00F451BE /* AVFoundation.framework in Frameworks */,
+				E704E43F1D23FFCA00263965 /* AlipaySDK.a in Frameworks */,
 				9A2AFA731C2AADCB00F451BE /* CoreLocation.framework in Frameworks */,
+				E704E4411D23FFCA00263965 /* libRedpacketLib.a in Frameworks */,
 				9A2AFA711C2AADC200F451BE /* CoreTelephony.framework in Frameworks */,
 				1FAD25EBE59E07248BD0F7D5 /* libPods-LeanChat.a in Frameworks */,
 			);
@@ -232,6 +273,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		434333A11CE0B0D10032EDF1 /* Redpacket */ = {
+			isa = PBXGroup;
+			children = (
+				E704E4311D23FFCA00263965 /* RedpacketLib */,
+				434333CD1CE0B0D10032EDF1 /* RedpacketSDK */,
+			);
+			name = Redpacket;
+			path = ../Redpacket;
+			sourceTree = "<group>";
+		};
+		434333CD1CE0B0D10032EDF1 /* RedpacketSDK */ = {
+			isa = PBXGroup;
+			children = (
+				434333CE1CE0B0D10032EDF1 /* RedpacketCellResource.bundle */,
+				434333CF1CE0B0D10032EDF1 /* RedpacketConfig.h */,
+				434333D01CE0B0D10032EDF1 /* RedpacketConfig.m */,
+				434333D11CE0B0D10032EDF1 /* RedpacketDemoViewController.h */,
+				434333D21CE0B0D10032EDF1 /* RedpacketDemoViewController.m */,
+				434333D31CE0B0D10032EDF1 /* RedpacketHackViewController.h */,
+				434333D41CE0B0D10032EDF1 /* RedpacketHackViewController.m */,
+				434333D51CE0B0D10032EDF1 /* RedpacketMessage.h */,
+				434333D61CE0B0D10032EDF1 /* RedpacketMessage.m */,
+				434333D71CE0B0D10032EDF1 /* RedpacketMessageCell.h */,
+				434333D81CE0B0D10032EDF1 /* RedpacketMessageCell.m */,
+				434333D91CE0B0D10032EDF1 /* RedpacketTakenMessageTipCell.h */,
+				434333DA1CE0B0D10032EDF1 /* RedpacketTakenMessageTipCell.m */,
+			);
+			path = RedpacketSDK;
+			sourceTree = "<group>";
+		};
 		700E6A121B3D2B4E00675021 /* LZPushManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,6 +323,7 @@
 		7073FC0E1B147048006F2692 = {
 			isa = PBXGroup;
 			children = (
+				434333A11CE0B0D10032EDF1 /* Redpacket */,
 				906327CF1C508DD100B69415 /* LeanChatLib.xcodeproj */,
 				7073FC191B147048006F2692 /* LeanChat */,
 				7073FC181B147048006F2692 /* Products */,
@@ -496,6 +568,7 @@
 		B215B044676D1B59F414465D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E704E4461D24C7A100263965 /* CoreMotion.framework */,
 				9A2AFA7E1C2AB23400F451BE /* UIKit.framework */,
 				9A2AFA7C1C2AB22500F451BE /* StoreKit.framework */,
 				9A2AFA7A1C2AB21E00F451BE /* Security.framework */,
@@ -518,6 +591,49 @@
 				4A71AD2EA525F79828723CA0 /* Pods-LeanChat.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		E704E4311D23FFCA00263965 /* RedpacketLib */ = {
+			isa = PBXGroup;
+			children = (
+				E704E4321D23FFCA00263965 /* AlipayLib */,
+				E704E4341D23FFCA00263965 /* AlipaySDK.bundle */,
+				E704E4351D23FFCA00263965 /* lib */,
+				E704E4371D23FFCA00263965 /* RedpacketErrorCode.h */,
+				E704E4381D23FFCA00263965 /* RedpacketMessageModel.h */,
+				E704E4391D23FFCA00263965 /* RedpacketOpenConst.h */,
+				E704E43A1D23FFCA00263965 /* RedpacketViewControl.h */,
+				E704E43B1D23FFCA00263965 /* resources */,
+				E704E43D1D23FFCA00263965 /* YZHRedpacketBridge.h */,
+				E704E43E1D23FFCA00263965 /* YZHRedpacketBridgeProtocol.h */,
+			);
+			path = RedpacketLib;
+			sourceTree = "<group>";
+		};
+		E704E4321D23FFCA00263965 /* AlipayLib */ = {
+			isa = PBXGroup;
+			children = (
+				E704E44A1D25190E00263965 /* AlipaySDK.h */,
+				E704E44B1D25190E00263965 /* APayAuthInfo.h */,
+				E704E4331D23FFCA00263965 /* AlipaySDK.a */,
+			);
+			path = AlipayLib;
+			sourceTree = "<group>";
+		};
+		E704E4351D23FFCA00263965 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				E704E4361D23FFCA00263965 /* libRedpacketLib.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		E704E43B1D23FFCA00263965 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				E704E43C1D23FFCA00263965 /* RedPacketResource.bundle */,
+			);
+			path = resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -551,11 +667,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = "lzwjava@LeanCloud QQ: 651142978";
+				ORGANIZATIONNAME = "云帐户";
 				TargetAttributes = {
 					7073FC161B147048006F2692 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = Y6X8P44TM5;
+						DevelopmentTeam = PUEB48NTQQ;
 					};
 				};
 			};
@@ -600,8 +716,11 @@
 			files = (
 				7073FCB31B14718C006F2692 /* CDConvNameVC.xib in Resources */,
 				7073FCBB1B14718C006F2692 /* CDAddFriendVC.xib in Resources */,
+				E704E4401D23FFCA00263965 /* AlipaySDK.bundle in Resources */,
+				E704E4421D23FFCA00263965 /* RedPacketResource.bundle in Resources */,
 				7073FCD11B14718C006F2692 /* CDImageLabelTableCell.xib in Resources */,
 				7073FCD31B14718C006F2692 /* CDLabelButtonTableCell.xib in Resources */,
+				434333FE1CE0B0D10032EDF1 /* RedpacketCellResource.bundle in Resources */,
 				7073FC281B147048006F2692 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -682,14 +801,18 @@
 				7073FCD71B14718C006F2692 /* CDResizableButton.m in Sources */,
 				7087E77E1B78BF34003641E2 /* CDEntryBaseVC.m in Sources */,
 				7073FC1D1B147048006F2692 /* main.m in Sources */,
+				434334001CE0B0D10032EDF1 /* RedpacketDemoViewController.m in Sources */,
 				7073FCAD1B14718C006F2692 /* CDWebViewVC.m in Sources */,
+				434334041CE0B0D10032EDF1 /* RedpacketTakenMessageTipCell.m in Sources */,
 				7073FCD21B14718C006F2692 /* CDLabelButtonTableCell.m in Sources */,
+				434334011CE0B0D10032EDF1 /* RedpacketHackViewController.m in Sources */,
 				70DC7DB41B2F531F0047B7AB /* CDUserManager.m in Sources */,
 				7073FCB81B14718C006F2692 /* CDLoginVC.m in Sources */,
 				7073FCAB1B14718C006F2692 /* CDBaseTableVC.m in Sources */,
 				7073FCD81B14718C006F2692 /* CDTextField.m in Sources */,
 				7073FCCA1B14718C006F2692 /* CDBadgeLabel.m in Sources */,
 				70B1C51B1B413E1500DCEC8D /* MCMutipleSectionTC.m in Sources */,
+				434334021CE0B0D10032EDF1 /* RedpacketMessage.m in Sources */,
 				7073FCC31B14718C006F2692 /* CDAbuseReport.m in Sources */,
 				7073FCCB1B14718C006F2692 /* CDButton.m in Sources */,
 				7073FCDB1B1471A4006F2692 /* CDAppDelegate.m in Sources */,
@@ -704,10 +827,12 @@
 				7073FCD51B14718C006F2692 /* CDPopMenuItem.m in Sources */,
 				7073FCCF1B14718C006F2692 /* CDEntryBottomButton.m in Sources */,
 				700E6A151B3D2B4E00675021 /* LZPushManager.m in Sources */,
+				434333FF1CE0B0D10032EDF1 /* RedpacketConfig.m in Sources */,
 				7073FCD01B14718C006F2692 /* CDImageLabelTableCell.m in Sources */,
 				7073FCBF1B14718C006F2692 /* CDProfileVC.m in Sources */,
 				7073FCB51B14718C006F2692 /* CDGroupedConvListVC.m in Sources */,
 				7073FCB41B14718C006F2692 /* CDConvReportAbuseVC.m in Sources */,
+				434334031CE0B0D10032EDF1 /* RedpacketMessageCell.m in Sources */,
 				7092330D1B45299A00E2D1F5 /* CDSettingVC.m in Sources */,
 				7073FCAE1B14718C006F2692 /* CDChatVC.m in Sources */,
 				708DF4711B41A9D20047C994 /* CDSelectMemberVC.m in Sources */,
@@ -822,6 +947,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "LeanChat/LeanChat-Prefix.pch";
@@ -831,9 +957,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LeanChat/vendor/WeChatSDK",
+					"$(SRCROOT)/../Redpacket/RedpacketLib/lib",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
+					"-all_load",
 					"-ObjC",
 					"-undefined",
 					dynamic_lookup,
@@ -896,9 +1024,10 @@
 					"-framework",
 					"\"UIKit\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.avoscloud.leanchat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.redpacket.LeanCloudDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Redpacket/RedpacketLib $(PROJECT_DIR)/../Redpacket/RedpacketSDK";
 			};
 			name = Debug;
 		};
@@ -910,6 +1039,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "LeanChat/LeanChat-Prefix.pch";
 				INFOPLIST_FILE = LeanChat/Info.plist;
@@ -918,9 +1048,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LeanChat/vendor/WeChatSDK",
+					"$(SRCROOT)/../Redpacket/RedpacketLib/lib",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
+					"-all_load",
 					"-ObjC",
 					"-undefined",
 					dynamic_lookup,
@@ -983,9 +1115,10 @@
 					"-framework",
 					"\"UIKit\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.avoscloud.leanchat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.redpacket.LeanCloudDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Redpacket/RedpacketLib $(PROJECT_DIR)/../Redpacket/RedpacketSDK";
 			};
 			name = Release;
 		};

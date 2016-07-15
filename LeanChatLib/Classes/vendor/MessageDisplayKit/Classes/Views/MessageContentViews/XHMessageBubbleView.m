@@ -88,7 +88,7 @@ static CGFloat const kVoiceMargin = 20.0f;
     CGSize bubbleSize;
     switch (message.messageMediaType) {
         case XHBubbleMessageMediaTypeText: {
-            bubbleSize = [XHMessageBubbleView neededSizeForText:message.text];
+            bubbleSize = [XHMessageBubbleView neededSizeForText:message.text?message.text:@""];
             break;
         }
         case XHBubbleMessageMediaTypePhoto: {

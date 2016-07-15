@@ -13,6 +13,7 @@
 #import "CDFailedMessageStore.h"
 #import "CDMacros.h"
 #import "CDChatManager_Internal.h"
+#import "RedpacketMessage.h"
 
 static CDChatManager *instance;
 
@@ -195,6 +196,14 @@ static CDChatManager *instance;
 #pragma mark - utils
 
 - (void)sendMessage:(AVIMTypedMessage*)message conversation:(AVIMConversation *)conversation callback:(AVBooleanResultBlock)block {
+    // 必须保持 AVIMTypedMessage 与 XHMessage 位置一致，所以需要一个假的消息来占位
+    // 但是发送用的是 RedpacketTakenAVIMMessage
+    if ([message isKindOfClass:[RedpacketTakenAVIMTypedMessage class]]) {
+        if(block) {
+            block(YES, nil);
+        }
+        return;
+    }
     id<CDUserModelDelegate> selfUser = [[CDChatManager manager].userDelegate getUserById:self.clientId];
     NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
     // 云代码中获取到用户名，来设置推送消息, 老王:今晚约吗？
@@ -234,6 +243,12 @@ static CDChatManager *instance;
         for (AVIMTypedMessage *message in messages) {
             if ([message isKindOfClass:[AVIMTypedMessage class]]) {
                 [typedMessages addObject:message];
+            }
+            else if([message isKindOfClass:[AVIMMessage class]]) {
+                if ([message isRedpacket]) {
+                    RedpacketTakenAVIMMessage *m = [RedpacketTakenAVIMTypedMessage messageWithAVIMMessage:message];
+                    [typedMessages addObject:m];
+                }
             }
         }
         block(typedMessages, error);
@@ -306,6 +321,18 @@ static CDChatManager *instance;
     // 不做处理，此应用没有用到
     // 可以看做跟 AVIMTypedMessage 两个频道。构造消息和收消息的接口都不一样，互不干扰。
     // 其实一般不用，有特殊的需求时可以考虑优先用 自定义 AVIMTypedMessage 来实现。见 AVIMCustomMessage 类
+    
+#pragma mark - 红包被抢消息处理
+    
+    if([message isRedpacket]
+       && (RedpacketMessageTypeTedpacketTakenMessage == message.redpacket.messageType)) {
+           NSString *currentUserId = message.redpacket.currentUser.userId;
+           if([currentUserId isEqualToString:message.redpacket.redpacketSender.userId]
+              || [currentUserId isEqualToString:message.redpacket.redpacketReceiver.userId]) {
+               RedpacketTakenAVIMTypedMessage *m = [RedpacketTakenAVIMTypedMessage messageWithAVIMMessage:message];
+               [self receiveMessage:m conversation:conversation];
+           }
+    }
 }
 
 // content : "{\"_lctype\":-1,\"_lctext\":\"sdfdf\"}"  sdk 会解析好
@@ -527,10 +554,39 @@ static CDChatManager *instance;
         NSMutableSet *userIds = [NSMutableSet set];
         NSUInteger totalUnreadCount = 0;
         for (AVIMConversation *conversation in conversations) {
-            NSArray *lastestMessages = [conversation queryMessagesFromCacheWithLimit:1];
-            if (lastestMessages.count > 0) {
-                conversation.lastMessage = lastestMessages[0];
+#pragma mark - 红包相关修改
+            // 抢红包的消息是通过 AVIMMessage 发的，因为 Demo 中默认是忽略处理 AVIMMessage 的。
+            // 但是 SDK 仍然会保存AVIMMessage 的消息，而在 Demo 的这一部分并未考虑到 AVIMMessage
+            // 的情况，所以当有 AVIMMessage 的时候，它仍然会保存到 lastMessage，并“正常”显示出来。
+            // 所以这里把不合适的 AVIMMessage 过滤掉。
+            AVIMTypedMessage *m = nil;
+            NSUInteger times = 1;
+            while(nil == m) {
+                NSArray *lastestMessages = [conversation queryMessagesFromCacheWithLimit:20 * times];
+                if (lastestMessages.count > 0) {
+                    for (NSUInteger i = lastestMessages.count; i > 0; i --) {
+                        const AVIMMessage *m2 = lastestMessages[i - 1];
+                        if ([m2 isKindOfClass:[AVIMTypedMessage class]]) {
+                            m = (AVIMTypedMessage *)m2;
+                            break;
+                        }
+                        else if([m2.redpacket.currentUser.userId isEqualToString:m2.redpacket.redpacketSender.userId]
+                              || [m2.redpacket.currentUser.userId isEqualToString:m2.redpacket.redpacketReceiver.userId]) {
+                            // 这里只是将错就错，原来的代码也是这样未考虑 AVIMMessage 的情况
+                            m = (AVIMTypedMessage *)m2;
+                            break;
+                        }
+                    }
+                }
+                times ++;
+                if (lastestMessages.count < 20 * times) {
+                    // 已经查找了所有的数据
+                    break;
+                }
             }
+#pragma mark -
+            conversation.lastMessage = m;
+            
             if (conversation.type == CDConversationTypeSingle) {
                 [userIds addObject:conversation.otherId];
             } else {
