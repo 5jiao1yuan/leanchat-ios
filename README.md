@@ -3,8 +3,12 @@
 [![CocoaPods](http://img.shields.io/cocoapods/p/LeanChatLib.svg?style=flat)](http://cocoapods.org/?q=LeanChatLib)&nbsp;
 [![Support](https://img.shields.io/badge/support-iOS%207%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/)
 
+**‼️注意：LeanChatLib 已经停止更新，请移步  [ChatKit-OC](https://github.com/leancloud/ChatKit-OC) ，后期也会使用 [ChatKit-OC](https://github.com/leancloud/ChatKit-OC) 对本Demo进行重写。**
+
 ![leanchat](https://cloud.githubusercontent.com/assets/5022872/8431636/4eff0aca-1f6d-11e5-8728-f8f450dac380.gif)
- 
+
+
+
 ## App Store  
 LeanChat 已经在 App Store 上架，可前往 https://itunes.apple.com/gb/app/leanchat/id943324553 或在 App Store 上搜 LeanChat。
  
